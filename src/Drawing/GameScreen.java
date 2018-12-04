@@ -31,7 +31,11 @@ public class GameScreen extends Canvas {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
 		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
-			entity.draw(gc);
+			if(entity instanceof Bomb) {
+				if(!((Bomb)entity).isIsbombed()) entity.draw(gc);
+			}
+			else
+			 entity.draw(gc);
 			
 		}
 	}

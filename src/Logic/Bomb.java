@@ -15,8 +15,20 @@ public class Bomb extends Entity{
 		this.power = power;
 		this.x = x;
 		this.y = y;
-		isbombed = false;
 		this.bmbpic = new Image(ClassLoader.getSystemResource("bomb_1.png").toString());
+		Thread t = new Thread(()-> {
+			isbombed = false;
+				try {
+					Thread.sleep(1500);
+					
+				}
+				catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			isbombed = true;
+		
+		});
+		t.start();
 	}
 
 	public boolean isIsbombed() {
@@ -32,7 +44,6 @@ public class Bomb extends Entity{
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		
 	}
 	

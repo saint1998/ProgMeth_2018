@@ -9,10 +9,9 @@ public abstract class Entity implements IRenderable {
 	protected int z;
 	protected boolean Death;
 	
-	protected Entity(double x, double y){
+	protected Entity(){
 		Death = false;
-		this.x = x;
-		this.y = y;
+
 	}
 	
 	public boolean isDeath() {

@@ -2,11 +2,13 @@ package application;
 
 import Drawing.GameScreen;
 import Logic.Gamelogic;
+import input.InputUtility;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import sharedObject.RenderableHolder;
 import Logic.Gamelogic;
 
 public class Main extends Application {
@@ -19,7 +21,7 @@ public class Main extends Application {
 		primaryStage.setTitle("Bomb It");
 		
 		Gamelogic logic = new Gamelogic();
-		GameScreen gameScreen = new GameScreen(640, 840);
+		GameScreen gameScreen = new GameScreen(600, 600);
 		root.getChildren().add(gameScreen);
 		gameScreen.requestFocus();
 		
@@ -28,6 +30,8 @@ public class Main extends Application {
 		AnimationTimer animation = new AnimationTimer() {
 			public void handle(long now) {
 				gameScreen.paintComponent();
+				logic.logicUpdate();
+				RenderableHolder.getInstance().update();
 			}
 			
 		};

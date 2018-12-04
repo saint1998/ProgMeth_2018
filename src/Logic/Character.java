@@ -21,7 +21,7 @@ public abstract class Character extends Entity {
 		this.x = x;
 		this.y = y;
 		this.bomb = 1;
-		this.power = 1;
+		this.power = 10;
 		chpic = new Image(ClassLoader.getSystemResource("stand.png").toString());
 	}
 	
@@ -30,8 +30,12 @@ public abstract class Character extends Entity {
 		RenderableHolder.getInstance().add(bomb);	
 	}
 
-	public void isAtked() {
-		isDeath = true;
+	public void isAtked(double x,double y, int power) {
+		if(this.x == x && this.y == y)isDeath = true;
+	}
+
+	public boolean isDeath() {
+		return isDeath;
 	}
 
 	protected void up() {

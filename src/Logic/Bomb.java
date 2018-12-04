@@ -30,6 +30,10 @@ public class Bomb extends Entity{
 		});
 		t.start();
 	}
+	
+	private void explode() {
+		
+	}
 
 	public boolean isIsbombed() {
 		return isbombed;

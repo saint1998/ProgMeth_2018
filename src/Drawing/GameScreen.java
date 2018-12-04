@@ -1,6 +1,7 @@
 package Drawing;
 
 import Logic.Bomb;
+import Logic.Character;
 import input.InputUtility;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -33,6 +34,9 @@ public class GameScreen extends Canvas {
 		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
 			if(entity instanceof Bomb) {
 				if(!((Bomb)entity).isIsbombed()) entity.draw(gc);
+			}
+			if(entity instanceof Character) {
+				if(!((Character)entity).isDeath()) entity.draw(gc);
 			}
 			else
 			 entity.draw(gc);

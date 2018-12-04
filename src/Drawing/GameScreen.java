@@ -1,5 +1,6 @@
 package Drawing;
 
+import Logic.Bomb;
 import input.InputUtility;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -30,9 +31,8 @@ public class GameScreen extends Canvas {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
 		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
-			if(!entity.isDeath()) {
-				entity.draw(gc);
-			}
+			entity.draw(gc);
+			
 		}
 	}
 

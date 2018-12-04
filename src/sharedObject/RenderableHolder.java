@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import Logic.Bomb;
 import Logic.Character;
 import javafx.scene.image.Image;
 import Logic.Field;
@@ -16,6 +17,7 @@ public class RenderableHolder {
 	private List<IRenderable> entities;
 	private Comparator<IRenderable> comparator;
 	public static Image mapSprite;
+	public Bomb bomb;
 	
 	static {
 		loadResource();
@@ -35,7 +37,7 @@ public class RenderableHolder {
 	}
 	
 	public static void loadResource() {
-		mapSprite = new Image(ClassLoader.getSystemResource("Map_morroc.png").toString());
+		mapSprite = new Image(ClassLoader.getSystemResource("map_background.png").toString());
 		
 	}
 	
@@ -46,14 +48,16 @@ public class RenderableHolder {
 		for(IRenderable x: entities){
 			if(x instanceof Character) System.out.println("Character");
 			if(x instanceof Field) System.out.println("field");
+			if(x instanceof Bomb) System.out.println("Bomb");
 		}
 
 	}
 	
 	public void update() {
-		for (int i = entities.size() - 1; i >= 0; i--) {
-			if (entities.get(i).isDeath())
-				entities.remove(i);
+		for (IRenderable i : entities) {
+			if(i instanceof Bomb) {
+				((Bomb)i).update();
+			}	
 		}
 	}
 	

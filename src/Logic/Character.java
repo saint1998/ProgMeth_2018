@@ -6,6 +6,7 @@ import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import sharedObject.RenderableHolder;
 
 public class Character extends Entity {
 	boolean isDeath = false;
@@ -20,7 +21,12 @@ public class Character extends Entity {
 		this.y = y;
 		this.bomb = 1;
 		this.power = 1;
-		chpic = new Image(ClassLoader.getSystemResource("Novice.png").toString());
+		chpic = new Image(ClassLoader.getSystemResource("stand.png").toString());
+	}
+	
+	public void bomb() {
+		Bomb bomb = new Bomb(x,y,power);
+		RenderableHolder.getInstance().add(bomb);	
 	}
 
 	public void isAtked() {
@@ -56,6 +62,8 @@ public class Character extends Entity {
 			right();
 		else if (InputUtility.getKeyPressed(KeyCode.A))
 			left();
+		else if(InputUtility.getKeyPressed(KeyCode.SPACE))
+			bomb();
 
 	}
 

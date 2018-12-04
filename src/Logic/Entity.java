@@ -7,20 +7,15 @@ public abstract class Entity implements IRenderable {
 	
 	protected double x,y;
 	protected int z;
-	protected boolean Death;
 	
 	protected Entity(){
-		Death = false;
-
-	}
-	
-	public boolean isDeath() {
-		return Death;
 	}
 	
 	public int getZ(){
 		return z;
 	}
+	
+	public abstract void update();
 
 
 }

@@ -17,9 +17,6 @@ public class Field implements IRenderable {
 		gc.drawImage(RenderableHolder.mapSprite, 0, 0);		
 	}
 
-	@Override
-	public boolean isDeath() {
-		return false;
-	}
+
 
 }

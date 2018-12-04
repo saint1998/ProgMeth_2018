@@ -9,15 +9,18 @@ import sharedObject.RenderableHolder;
 public class Gamelogic {
 	private List<Entity> gameObjectContainer;
 
-	private Character character;
+	private Character_1 character1;
+	private Character_2 character2;
 
 	public Gamelogic() {
 		this.gameObjectContainer = new ArrayList<Entity>();
 
 		Field field = new Field();
 		RenderableHolder.getInstance().add(field);
-		character = new Character(200.0 , 200.0);
-		addNewObject(character);
+		character1 = new Character_1(200.0 , 200.0);
+		character2 = new Character_2(300, 300);
+		addNewObject(character1);
+		addNewObject(character2);
 	}
 
 	protected void addNewObject(Entity entity) {
@@ -26,7 +29,8 @@ public class Gamelogic {
 	}
 
 	public void logicUpdate() {
-		character.update();
+		character1.update();
+		character2.update();
 	}
 
 }

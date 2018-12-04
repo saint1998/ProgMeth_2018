@@ -8,13 +8,14 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import sharedObject.RenderableHolder;
 
-public class Character extends Entity {
-	boolean isDeath = false;
-	int speed = 5;
-	int bomb;
-	int power;
-	Image chpic;
-	double x, y;
+public abstract class Character extends Entity {
+	private boolean isDeath = false;
+	private int speed = 5;
+	private int bomb;
+	private int power;
+	private Image chpic;
+	private double x, y;
+
 
 	public Character(double x, double y) {
 		this.x = x;
@@ -24,7 +25,7 @@ public class Character extends Entity {
 		chpic = new Image(ClassLoader.getSystemResource("stand.png").toString());
 	}
 	
-	public void bomb() {
+	protected void bomb() {
 		Bomb bomb = new Bomb(x,y,power);
 		RenderableHolder.getInstance().add(bomb);	
 	}
@@ -33,44 +34,33 @@ public class Character extends Entity {
 		isDeath = true;
 	}
 
-	private void up() {
+	protected void up() {
 		if(this.y - speed < 0) this.y = 0;
 		else this.y -= speed;
 	}
 
-	private void down() {
+	protected void down() {
 		if(this.y + speed > 600 - chpic.getHeight()) this.y = 600 - chpic.getHeight();
 		else this.y += speed;
 	}
 
-	private void right() {
+	protected void right() {
 		if(this.x + speed > 600 - chpic.getWidth()) this.x = 600 - chpic.getWidth();
 		else this.x += speed;
 	}
 
-	private void left() {
+	protected void left() {
 		if(this.x - speed < 0) this.x = 0;
 		else this.x -= speed;
 	}
 
-	public void update() {
-		if (InputUtility.getKeyPressed(KeyCode.W))
-			up();
-		else if (InputUtility.getKeyPressed(KeyCode.S))
-			down();
-		else if (InputUtility.getKeyPressed(KeyCode.D))
-			right();
-		else if (InputUtility.getKeyPressed(KeyCode.A))
-			left();
-		else if(InputUtility.getKeyPressed(KeyCode.SPACE))
-			bomb();
-
-	}
+	public abstract void update(); 
 
 	@Override
 	public void draw(GraphicsContext gc) {
 		gc.drawImage(chpic, x, y);
 
 	}
+
 
 }

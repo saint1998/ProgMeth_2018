@@ -16,7 +16,6 @@ public abstract class Character extends Entity {
 	private Image chpic;
 	private double x, y;
 
-
 	public Character(double x, double y) {
 		this.x = x;
 		this.y = y;
@@ -24,14 +23,19 @@ public abstract class Character extends Entity {
 		this.power = 10;
 		chpic = new Image(ClassLoader.getSystemResource("stand.png").toString());
 	}
-	
+
 	protected void bomb(Character ch1, Character ch2) {
-		Bomb bomb = new Bomb(x,y,power,ch1,ch2);
-		RenderableHolder.getInstance().add(bomb);	
+		Bomb bomb = new Bomb(x, y, power, ch1, ch2);
+		RenderableHolder.getInstance().add(bomb);
 	}
 
-	public void isAtked(double x,double y, int power) {
-		if(this.x == x && this.y == y)isDeath = true;
+	public void isAtked(double x, double y, Bomb bmb) {
+		if (this.x == x && this.y + getHeight() >= y && this.y + getHeight() <= y + bmb.getHeight())
+			isDeath = true;
+	}
+
+	public void setDeath(boolean isDeath) {
+		this.isDeath = isDeath;
 	}
 
 	public boolean isDeath() {
@@ -39,26 +43,34 @@ public abstract class Character extends Entity {
 	}
 
 	protected void up() {
-		if(this.y - speed < 0) this.y = 0;
-		else this.y -= speed;
+		if (this.y - speed < 0)
+			this.y = 0;
+		else
+			this.y -= speed;
 	}
 
 	protected void down() {
-		if(this.y + speed > 600 - chpic.getHeight()) this.y = 600 - chpic.getHeight();
-		else this.y += speed;
+		if (this.y + speed > 600 - chpic.getHeight())
+			this.y = 600 - chpic.getHeight();
+		else
+			this.y += speed;
 	}
 
 	protected void right() {
-		if(this.x + speed > 600 - chpic.getWidth()) this.x = 600 - chpic.getWidth();
-		else this.x += speed;
+		if (this.x + speed > 600 - chpic.getWidth())
+			this.x = 600 - chpic.getWidth();
+		else
+			this.x += speed;
 	}
 
 	protected void left() {
-		if(this.x - speed < 0) this.x = 0;
-		else this.x -= speed;
+		if (this.x - speed < 0)
+			this.x = 0;
+		else
+			this.x -= speed;
 	}
 
-	public abstract void update(); 
+	public abstract void update();
 
 	@Override
 	public void draw(GraphicsContext gc) {
@@ -66,5 +78,8 @@ public abstract class Character extends Entity {
 
 	}
 
+	public double getHeight() {
+		return chpic.getHeight();
+	}
 
 }

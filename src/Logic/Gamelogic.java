@@ -35,6 +35,10 @@ public class Gamelogic {
 		character2.update();
 		if(InputUtility.getKeyPressed(KeyCode.SPACE)) character1.bomb(character1,character2);
 		if(InputUtility.getKeyPressed(KeyCode.ENTER)) character2.bomb(character1, character2);
+		if(InputUtility.getKeyPressed(KeyCode.DIGIT0)) {
+			character1.setDeath(false);
+			character2.setDeath(false);
+		}
 		
 	}
 

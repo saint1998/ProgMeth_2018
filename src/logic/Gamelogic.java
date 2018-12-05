@@ -1,11 +1,11 @@
-package Logic;
+package logic;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Logic.Entity;
 import input.InputUtility;
 import javafx.scene.input.KeyCode;
+import logic.Entity;
 import sharedObject.RenderableHolder;
 
 public class Gamelogic {

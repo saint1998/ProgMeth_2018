@@ -6,10 +6,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import Logic.Bomb;
-import Logic.Character;
 import javafx.scene.image.Image;
-import Logic.Field;
+import logic.Bomb;
+import logic.Character;
+import logic.Field;
 
 public class RenderableHolder {
 	private static final RenderableHolder instance = new RenderableHolder();

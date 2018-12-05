@@ -1,4 +1,4 @@
-package Logic;
+package logic;
 
 import javafx.scene.canvas.GraphicsContext;
 import sharedObject.IRenderable;

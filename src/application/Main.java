@@ -1,15 +1,14 @@
 package application;
 
-import Drawing.GameScreen;
-import Logic.Gamelogic;
+import drawing.GameScreen;
 import input.InputUtility;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import logic.Gamelogic;
 import sharedObject.RenderableHolder;
-import Logic.Gamelogic;
 
 public class Main extends Application {
 

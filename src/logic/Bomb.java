@@ -1,4 +1,4 @@
-package Logic;
+package logic;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -27,15 +27,17 @@ public class Bomb extends Entity {
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
-			isbombed = true;
 			explode();
+			isbombed = true;
 		});
 		t.start();
 	}
 
 	private void explode() {
-		ch1.isAtked(x, y, this);
-		ch2.isAtked(x, y, this);
+		for(int i = 0 ; i < power ; i++) {
+			ch1.isAtked(x, y, this);
+			ch2.isAtked(x, y, this);
+		}
 	}
 
 	public boolean isIsbombed() {

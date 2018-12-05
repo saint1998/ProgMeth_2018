@@ -1,12 +1,12 @@
-package Drawing;
+package drawing;
 
-import Logic.Bomb;
-import Logic.Character;
 import input.InputUtility;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import logic.Bomb;
+import logic.Character;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 

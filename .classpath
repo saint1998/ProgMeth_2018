@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="res"/>
+	<classpathentry kind="src" path="map"/>
+	<classpathentry kind="src" path="character1"/>
+	<classpathentry kind="src" path="character2"/>
+	<classpathentry kind="src" path="block"/>
+	<classpathentry kind="src" path="eplosion"/>
+	<classpathentry kind="src" path="itemboot"/>
+	<classpathentry kind="src" path="itemhealth"/>
+	<classpathentry kind="src" path="itemplus"/>
+	<classpathentry kind="src" path="itempower"/>
+	<classpathentry kind="src" path="bomb"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

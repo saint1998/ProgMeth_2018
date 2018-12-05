@@ -18,11 +18,7 @@ public class Character_1 extends Character {
 		else if (InputUtility.getKeyPressed(KeyCode.D))
 			right();
 		else if (InputUtility.getKeyPressed(KeyCode.A))
-			left();
-		else if(InputUtility.getKeyPressed(KeyCode.SPACE))
-			bomb();
-
-		
+			left();	
 	}
 
 }

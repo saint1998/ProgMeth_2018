@@ -54,11 +54,7 @@ public class RenderableHolder {
 	}
 	
 	public void update() {
-		for (IRenderable i : entities) {
-			if(i instanceof Bomb) {
-				((Bomb)i).update();
-			}	
-		}
+
 	}
 	
 	public List<IRenderable> getEntities() {

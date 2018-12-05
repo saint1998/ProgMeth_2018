@@ -37,9 +37,7 @@ public class Main extends Application {
 		};
 		
 		animation.start();
-
 		
-
 	}
 
 	public static void main(String[] args) {

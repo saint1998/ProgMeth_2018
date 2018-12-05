@@ -25,8 +25,8 @@ public abstract class Character extends Entity {
 		chpic = new Image(ClassLoader.getSystemResource("stand.png").toString());
 	}
 	
-	protected void bomb() {
-		Bomb bomb = new Bomb(x,y,power);
+	protected void bomb(Character ch1, Character ch2) {
+		Bomb bomb = new Bomb(x,y,power,ch1,ch2);
 		RenderableHolder.getInstance().add(bomb);	
 	}
 

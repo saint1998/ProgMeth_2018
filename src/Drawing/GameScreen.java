@@ -35,7 +35,7 @@ public class GameScreen extends Canvas {
 			if(entity instanceof Bomb) {
 				if(!((Bomb)entity).isIsbombed()) entity.draw(gc);
 			}
-			if(entity instanceof Character) {
+			else if(entity instanceof Character) {
 				if(!((Character)entity).isDeath()) entity.draw(gc);
 			}
 			else

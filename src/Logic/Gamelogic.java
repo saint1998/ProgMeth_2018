@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Logic.Entity;
+import input.InputUtility;
+import javafx.scene.input.KeyCode;
 import sharedObject.RenderableHolder;
 
 public class Gamelogic {
@@ -31,6 +33,9 @@ public class Gamelogic {
 	public void logicUpdate() {
 		character1.update();
 		character2.update();
+		if(InputUtility.getKeyPressed(KeyCode.SPACE)) character1.bomb(character1,character2);
+		if(InputUtility.getKeyPressed(KeyCode.ENTER)) character2.bomb(character1, character2);
+		
 	}
 
 }

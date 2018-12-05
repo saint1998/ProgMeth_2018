@@ -20,11 +20,7 @@ public class Character_2 extends Character{
 			right();
 		else if (InputUtility.getKeyPressed(KeyCode.LEFT))
 			left();
-		else if(InputUtility.getKeyPressed(KeyCode.ENTER))
-			bomb();
 
-		
-		
 	}
 	
 

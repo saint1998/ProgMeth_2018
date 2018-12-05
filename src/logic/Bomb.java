@@ -2,6 +2,7 @@ package logic;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import sharedObject.RenderableHolder;
 
 public class Bomb extends Entity {
 
@@ -14,7 +15,7 @@ public class Bomb extends Entity {
 
 	public Bomb(double x, double y, int power, Character ch1, Character ch2) {
 		this.power = power;
-		this.bmbpic = new Image(ClassLoader.getSystemResource("bomb_1.png").toString());
+		this.bmbpic = new Image(ClassLoader.getSystemResource("red_bomb1.png").toString());
 		this.x = x;
 		this.y = y + ch1.getHeight() - bmbpic.getHeight();
 		this.ch1 = ch1;
@@ -34,9 +35,29 @@ public class Bomb extends Entity {
 	}
 
 	private void explode() {
-		for(int i = 0 ; i < power ; i++) {
-			ch1.isAtked(x, y, this);
-			ch2.isAtked(x, y, this);
+		for (int i = 1; i < power+1; ++i) {
+			ch1.isAtked(x-(bmbpic.getHeight()*i), y, this);
+			ch2.isAtked(x-(bmbpic.getHeight()*i), y, this);
+			Explosion expl = new Explosion(x-(bmbpic.getHeight()*i), y);
+			RenderableHolder.getInstance().add(expl);
+		}
+		for (int i = 1; i < power+1; ++i) {
+			ch1.isAtked(x+(bmbpic.getHeight()*i), y, this);
+			ch2.isAtked(x+(bmbpic.getHeight()*i), y, this);
+			Explosion expl = new Explosion(x+(bmbpic.getHeight()*i), y);
+			RenderableHolder.getInstance().add(expl);
+		}
+		for (int i = 1; i < power+1; ++i) {
+			ch1.isAtked(x, y-(bmbpic.getWidth()*i), this);
+			ch2.isAtked(x, y-(bmbpic.getWidth()*i), this);
+			Explosion expl = new Explosion(x, y-(bmbpic.getWidth()*i));
+			RenderableHolder.getInstance().add(expl);
+		}
+		for (int i = 1; i < power+1; ++i) {
+			ch1.isAtked(x, y+(bmbpic.getWidth()*i), this);
+			ch2.isAtked(x, y+(bmbpic.getWidth()*i), this);
+			Explosion expl = new Explosion(x, y+(bmbpic.getWidth()*i));
+			RenderableHolder.getInstance().add(expl);
 		}
 	}
 
@@ -54,7 +75,7 @@ public class Bomb extends Entity {
 	public void update() {
 
 	}
-	
+
 	public double getHeight() {
 		return bmbpic.getHeight();
 	}

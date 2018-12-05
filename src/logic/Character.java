@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.List;
+
 import com.sun.xml.internal.bind.v2.TODO;
 
 import input.InputUtility;
@@ -14,14 +16,14 @@ public abstract class Character extends Entity {
 	private int bomb;
 	private int power;
 	private Image chpic;
+	private int timeOfPic = 0;
 	private double x, y;
 
 	public Character(double x, double y) {
 		this.x = x;
 		this.y = y;
 		this.bomb = 1;
-		this.power = 10;
-		chpic = new Image(ClassLoader.getSystemResource("stand.png").toString());
+		this.power = 1;
 	}
 
 	protected void bomb(Character ch1, Character ch2) {
@@ -74,8 +76,18 @@ public abstract class Character extends Entity {
 
 	@Override
 	public void draw(GraphicsContext gc) {
+		timeOfPic++;
+		if(timeOfPic > 40) timeOfPic =0;
 		gc.drawImage(chpic, x, y);
 
+	}
+	
+	public int getTimeOfPic() {
+		return timeOfPic;
+	}
+
+	protected void setpic(Image chpic) {
+		this.chpic = chpic;
 	}
 
 	public double getHeight() {

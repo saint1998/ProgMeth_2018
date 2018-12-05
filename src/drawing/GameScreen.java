@@ -7,6 +7,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import logic.Bomb;
 import logic.Character;
+import logic.Explosion;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 

@@ -12,6 +12,7 @@ public class Bomb extends Entity {
 	private int power;
 	private boolean isbombed;
 	private Character ch1, ch2;
+	private int timeOfPic = 0;
 
 	public Bomb(double x, double y, int power, Character ch1, Character ch2) {
 		this.power = power;
@@ -20,18 +21,7 @@ public class Bomb extends Entity {
 		this.y = y + ch1.getHeight() - bmbpic.getHeight();
 		this.ch1 = ch1;
 		this.ch2 = ch2;
-		Thread t = new Thread(() -> {
-			isbombed = false;
-			try {
-				Thread.sleep(1500);
-
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-			explode();
-			isbombed = true;
-		});
-		t.start();
+		
 	}
 
 	private void explode() {
@@ -67,12 +57,17 @@ public class Bomb extends Entity {
 
 	@Override
 	public void draw(GraphicsContext gc) {
+		timeOfPic ++;
 		gc.drawImage(bmbpic, x, y);
 
 	}
 
 	@Override
 	public void update() {
+		if(timeOfPic > 100) {
+			explode();
+			isbombed = true;
+		}
 
 	}
 

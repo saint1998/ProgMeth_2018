@@ -77,7 +77,7 @@ public abstract class Character extends Entity {
 	@Override
 	public void draw(GraphicsContext gc) {
 		timeOfPic++;
-		if(timeOfPic > 40) timeOfPic =0;
+		if(timeOfPic >= 40) timeOfPic =0;
 		gc.drawImage(chpic, x, y);
 
 	}

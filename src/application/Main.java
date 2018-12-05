@@ -27,7 +27,7 @@ public class Main extends Application {
 		primaryStage.show();
 		
 		AnimationTimer animation = new AnimationTimer() {
-			public void handle(long now) {
+			public void handle(long now) {				
 				gameScreen.paintComponent();
 				logic.logicUpdate();
 				RenderableHolder.getInstance().update();

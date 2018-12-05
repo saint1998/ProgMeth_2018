@@ -16,7 +16,7 @@ public class Explosion extends Entity {
 	public Explosion(double x, double y) {
 		this.x = x;
 		this.y = y;
-		for(int i = 1; i < 9 ;++i) {
+		for(int i = 1; i < 9 ;i++) {
 			explospics.add(new Image(ClassLoader.getSystemResource("ef_bomb"+i+".png").toString()));
 		}
 	}
@@ -25,7 +25,7 @@ public class Explosion extends Entity {
 	@Override
 	public void draw(GraphicsContext gc) {
 		timeOfPic++;
-		if(timeOfPic > 80) timeOfPic = 0;
+		if(timeOfPic >= 50) timeOfPic = 0;
 		gc.drawImage(explospic, x, y);
 		
 	}

@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.scene.image.Image;
 import logic.Bomb;
 import logic.Character;
+import logic.Explosion;
 import logic.Field;
 
 public class RenderableHolder {
@@ -54,7 +55,12 @@ public class RenderableHolder {
 	}
 	
 	public void update() {
-
+		for(IRenderable i :entities) {
+			if(i instanceof Bomb) {
+			}
+		}
+	
+		
 	}
 	
 	public List<IRenderable> getEntities() {

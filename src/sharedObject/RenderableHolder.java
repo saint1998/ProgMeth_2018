@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import logic.Bomb;
 import logic.Character;
@@ -53,13 +54,29 @@ public class RenderableHolder {
 		}
 
 	}
+	public void draw(GraphicsContext gc) {
+		for (int i =0; i<entities.size(); i++) {
+			entities.get(i).draw(gc);
+		}
+	}
 	
-	public void update() {
-		for(IRenderable i :entities) {
-			if(i instanceof Bomb) {
+	
+	public void remove() {
+		int n = entities.size();
+		for (int i=n-1; i>=0; i--) {
+			if (entities.get(i).isVisible() == false) {
+				entities.remove(i);
 			}
 		}
+	}
 	
+	
+	public void update() {
+		for(IRenderable i : entities) {
+			if(i instanceof Bomb) {
+				((Bomb) i).update();
+			}
+		}
 		
 	}
 	

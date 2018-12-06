@@ -19,7 +19,7 @@ public class Gamelogic {
 
 		Field field = new Field();
 		RenderableHolder.getInstance().add(field);
-		character1 = new Character_1(200.0 , 200.0);
+		character1 = new Character_1(200.0, 200.0);
 		character2 = new Character_2(300, 300);
 		addNewObject(character1);
 		addNewObject(character2);
@@ -33,13 +33,19 @@ public class Gamelogic {
 	public void logicUpdate() {
 		character1.update();
 		character2.update();
-		if(InputUtility.getKeyPressed(KeyCode.SPACE)) character1.bomb(character1,character2);
-		if(InputUtility.getKeyPressed(KeyCode.ENTER)) character2.bomb(character1, character2);
-		if(InputUtility.getKeyPressed(KeyCode.DIGIT0)) {
-			character1.setDeath(false);
-			character2.setDeath(false);
+		if (InputUtility.getKeyPressed(KeyCode.SPACE))
+			character1.bomb(character1,character2);
+		if (InputUtility.getKeyPressed(KeyCode.ENTER))
+			character2.bomb(character1, character2);
+		if (InputUtility.getKeyPressed(KeyCode.DIGIT0)) {
+			addNewObject(character1);
+			addNewObject(character2);
 		}
-		
+
 	}
+	
+
+
+
 
 }

@@ -2,7 +2,6 @@ package logic;
 
 import java.util.List;
 
-import com.sun.xml.internal.bind.v2.TODO;
 
 import input.InputUtility;
 import javafx.scene.canvas.GraphicsContext;
@@ -11,7 +10,7 @@ import javafx.scene.input.KeyCode;
 import sharedObject.RenderableHolder;
 
 public abstract class Character extends Entity {
-	private boolean isDeath = false;
+	private boolean isVisible = true;
 	private int speed = 5;
 	private int bomb;
 	private int power;
@@ -26,22 +25,37 @@ public abstract class Character extends Entity {
 		this.power = 1;
 	}
 
-	protected void bomb(Character ch1, Character ch2) {
+	protected void bomb( Character ch1, Character ch2) {
 		Bomb bomb = new Bomb(x, y, power, ch1, ch2);
 		RenderableHolder.getInstance().add(bomb);
 	}
 
+	public int getPower() {
+		return power;
+	}
+
+
+
+	public double getX() {
+		return x;
+	}
+
+
+
+	public double getY() {
+		return y;
+	}
+
+
+
 	public void isAtked(double x, double y, Bomb bmb) {
 		if (this.x == x && this.y + getHeight() >= y && this.y + getHeight() <= y + bmb.getHeight())
-			isDeath = true;
+			isVisible = false;
 	}
 
-	public void setDeath(boolean isDeath) {
-		this.isDeath = isDeath;
-	}
 
-	public boolean isDeath() {
-		return isDeath;
+	public boolean isVisible() {
+		return isVisible;
 	}
 
 	protected void up() {

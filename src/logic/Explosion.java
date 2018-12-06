@@ -54,8 +54,8 @@ public class Explosion extends Entity {
 	}
 	@Override
 	public void update() {
-		if (isVisible) {
-			explospic = explospics.get(getTimeOfPic() / 10);
+		if (timeOfPic<10) {
+			explospic = explospics.get(timeOfPic/ 10);
 		}
 	}
 

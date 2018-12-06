@@ -41,26 +41,27 @@ public class Bomb extends Entity {
 		for (int i = 1; i < power+1; ++i) {
 			ch1.isAtked(x-(bmbpic.getHeight()*i), y, this);
 			ch2.isAtked(x-(bmbpic.getHeight()*i), y, this);
-//			Explosion expl = new Explosion(x-(bmbpic.getHeight()*i), y);
-//			RenderableHolder.getInstance().add(expl);
+			Explosion expl = new Explosion(x-(bmbpic.getHeight()*i), y);
+			RenderableHolder.getInstance().add(expl);
+			
 		}
 		for (int i = 1; i < power+1; ++i) {
 			ch1.isAtked(x+(bmbpic.getHeight()*i), y, this);
 			ch2.isAtked(x+(bmbpic.getHeight()*i), y, this);
-//			Explosion expl = new Explosion(x+(bmbpic.getHeight()*i), y);
-//			RenderableHolder.getInstance().add(expl);
+			Explosion expl = new Explosion(x+(bmbpic.getHeight()*i), y);
+			RenderableHolder.getInstance().add(expl);
 		}
 		for (int i = 1; i < power+1; ++i) {
 			ch1.isAtked(x, y-(bmbpic.getWidth()*i), this);
 			ch2.isAtked(x, y-(bmbpic.getWidth()*i), this);
-//			Explosion expl = new Explosion(x, y-(bmbpic.getWidth()*i));
-//			RenderableHolder.getInstance().add(expl);
+			Explosion expl = new Explosion(x, y-(bmbpic.getWidth()*i));
+			RenderableHolder.getInstance().add(expl);
 		}
 		for (int i = 1; i < power+1; ++i) {
 			ch1.isAtked(x, y+(bmbpic.getWidth()*i), this);
 			ch2.isAtked(x, y+(bmbpic.getWidth()*i), this);
-//			Explosion expl = new Explosion(x, y+(bmbpic.getWidth()*i));
-//			RenderableHolder.getInstance().add(expl);
+			Explosion expl = new Explosion(x, y+(bmbpic.getWidth()*i));
+			RenderableHolder.getInstance().add(expl);
 		}
 	}
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -20,13 +21,14 @@ public class RenderableHolder {
 	private Comparator<IRenderable> comparator;
 	public static Image mapSprite;
 	public Bomb bomb;
+	public Explosion expl;
 	
 	static {
 		loadResource();
 	}
 	
 	public RenderableHolder() {
-		entities = new ArrayList<IRenderable>();
+		entities = new CopyOnWriteArrayList<>();
 		comparator = (IRenderable o1, IRenderable o2) -> {
 			if (o1.getZ() > o2.getZ())
 				return 1;
@@ -76,6 +78,9 @@ public class RenderableHolder {
 			if(i instanceof Bomb) {
 				((Bomb) i).update();
 			}
+//			if(i instanceof Explosion) {
+//				((Explosion) i).update();
+//			}
 		}
 		
 	}

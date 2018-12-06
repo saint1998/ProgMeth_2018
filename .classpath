@@ -14,6 +14,7 @@
 	<classpathentry kind="src" path="fire"/>
 	<classpathentry kind="src" path="character3"/>
 	<classpathentry kind="src" path="monster"/>
+	<classpathentry kind="src" path="button"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

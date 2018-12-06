@@ -56,6 +56,7 @@ public class StartWindow {
 		gc.fillRect(0, 0, bg.getWidth(), bg.getHeight());
 		bgPic = new Image(ClassLoader.getSystemResource("start_scene.png").toString());
 		gc.drawImage(bgPic, 0, 0);
+		drawSelectedColor();
 	}
 
 	public void addAction() {
@@ -72,7 +73,6 @@ public class StartWindow {
 	}
 
 	public void drawSelectedColor() {
-		setBackground();
 		setMenu();
 		if(numberselected == 0) {
 			
@@ -90,12 +90,12 @@ public class StartWindow {
 
 	public void setStart() {
 		Image start = new Image(ClassLoader.getSystemResource("button_start.png").toString());
-		gc.drawImage(start, 320, 420);
+		gc.drawImage(start, 310, 380);
 	}
 	
 	public void setHowto() {
 		Image howTo = new Image(ClassLoader.getSystemResource("button_howto.png").toString());
-		gc.drawImage(howTo, 320, 469);
+		gc.drawImage(howTo, 310, 419);
 	}
 	
 	public void startAnimation() {

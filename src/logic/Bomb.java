@@ -17,6 +17,7 @@ public class Bomb extends Entity {
 	private boolean isVisible = true;
 	private Character ch1, ch2;
 	private int timeOfPic = 0;
+	private boolean isExplode;
 
 	public Bomb(double x, double y, int power, Character ch1, Character ch2) {
 		this.power = power;
@@ -35,6 +36,8 @@ public class Bomb extends Entity {
 	}
 
 	public void explode() {
+//		Explosion expl = new Explosion(x, y, power);
+//		RenderableHolder.getInstance().add(expl);
 		for (int i = 1; i < power+1; ++i) {
 			ch1.isAtked(x-(bmbpic.getHeight()*i), y, this);
 			ch2.isAtked(x-(bmbpic.getHeight()*i), y, this);
@@ -75,7 +78,10 @@ public class Bomb extends Entity {
 		if(timeOfPic< 80)
 			bmbpic = bmbpics.get(timeOfPic/10);
 		if(timeOfPic >= 80) {
-			explode();
+			if(!isExplode) {
+				explode();
+				isExplode=true;
+			}
 			isVisible = false;
 		}
 

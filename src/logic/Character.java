@@ -10,7 +10,7 @@ import javafx.scene.input.KeyCode;
 import sharedObject.RenderableHolder;
 
 public abstract class Character extends Entity {
-	private boolean isVisible = true;
+	private boolean isVisible;
 	private int speed = 5;
 	private int bomb;
 	private int power;
@@ -19,10 +19,15 @@ public abstract class Character extends Entity {
 	private double x, y;
 
 	public Character(double x, double y) {
+		this.isVisible = true;
 		this.x = x;
 		this.y = y;
 		this.bomb = 1;
 		this.power = 1;
+	}
+
+	public void setVisible(boolean isVisible) {
+		this.isVisible = isVisible;
 	}
 
 	protected void bomb( Character ch1, Character ch2) {
@@ -50,6 +55,8 @@ public abstract class Character extends Entity {
 
 	public void isAtked(double x, double y, Bomb bmb) {
 		if (this.x == x && this.y + getHeight() >= y && this.y + getHeight() <= y + bmb.getHeight())
+			isVisible = false;
+		if (this.x >= x && this.x  <= x+bmb.getHeight()&& this.y + getHeight() == y + bmb.getHeight())
 			isVisible = false;
 	}
 

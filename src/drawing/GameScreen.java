@@ -33,8 +33,7 @@ public class GameScreen extends Canvas {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
 		RenderableHolder.getInstance().remove();
-		RenderableHolder.getInstance().draw(gc);
-		
+		RenderableHolder.getInstance().draw(gc);		
 	}
 
 }

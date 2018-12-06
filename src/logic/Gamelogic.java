@@ -33,13 +33,22 @@ public class Gamelogic {
 	public void logicUpdate() {
 		character1.update();
 		character2.update();
-		if (InputUtility.getKeyPressed(KeyCode.SPACE))
+//		Boot boot = new Boot();
+//		addNewObject(boot);
+		if (InputUtility.getKeyPressed(KeyCode.SPACE) && character1.isVisible())
 			character1.bomb(character1,character2);
-		if (InputUtility.getKeyPressed(KeyCode.ENTER))
+		if (InputUtility.getKeyPressed(KeyCode.ENTER) && character2.isVisible())
 			character2.bomb(character1, character2);
 		if (InputUtility.getKeyPressed(KeyCode.DIGIT0)) {
-			addNewObject(character1);
-			addNewObject(character2);
+			character1.setVisible(true);
+//			if(!gameObjectContainer.contains(character1)) {
+//				character1 = new Character_1(200.0, 200.0);
+//				addNewObject(character1);
+//			}
+//			if(!gameObjectContainer.contains(character2)) {
+//				character2 = new Character_2(300, 300);
+//				addNewObject(character2);
+//			}
 		}
 
 	}

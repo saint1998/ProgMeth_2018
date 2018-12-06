@@ -22,6 +22,7 @@ public class StartWindow {
 	private boolean isPressedSpace = false;
 	private int numberselected = 0;
 	public Image bgPic;
+	private Image cursur;
 
 	public StartWindow(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -56,29 +57,34 @@ public class StartWindow {
 		gc.fillRect(0, 0, bg.getWidth(), bg.getHeight());
 		bgPic = new Image(ClassLoader.getSystemResource("start_scene.png").toString());
 		gc.drawImage(bgPic, 0, 0);
-		drawSelectedColor();
+		cursur = new Image(ClassLoader.getSystemResource("cursor.png").toString());
+		drawSelected();
 	}
 
 	public void addAction() {
 		bg.setOnKeyPressed((KeyEvent) -> {
-			if (!isPressedSpace) {
 				if (KeyEvent.getCode() == KeyCode.UP) {
 					if (numberselected != 0) {
 						numberselected--;
-						drawSelectedColor();
+						drawSelected();
 					}
 				}
-			}
+				if(KeyEvent.getCode() == KeyCode.DOWN)
+					if(numberselected != 1) {
+						numberselected++;
+						drawSelected();
+					}
+			
 		});
 	}
 
-	public void drawSelectedColor() {
+	public void drawSelected() {
 		setMenu();
 		if(numberselected == 0) {
-			
+			gc.drawImage(cursur, 430, 400);
 		}
 		if(numberselected == 1) {
-			
+			gc.drawImage(cursur, 430, 440);
 		}
 
 	}

@@ -8,6 +8,7 @@ public class application extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		StartWindow startwindow = new StartWindow(primaryStage);
+		startwindow.startAnimation();
 		primaryStage.show();
 	
 	}

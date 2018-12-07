@@ -2,20 +2,14 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="map"/>
-	<classpathentry kind="src" path="character1"/>
-	<classpathentry kind="src" path="character2"/>
-	<classpathentry kind="src" path="block"/>
-	<classpathentry kind="src" path="eplosion"/>
-	<classpathentry kind="src" path="itemboot"/>
-	<classpathentry kind="src" path="itemhealth"/>
-	<classpathentry kind="src" path="itemplus"/>
-	<classpathentry kind="src" path="itempower"/>
-	<classpathentry kind="src" path="bomb"/>
 	<classpathentry kind="src" path="fire"/>
 	<classpathentry kind="src" path="character3"/>
 	<classpathentry kind="src" path="monster"/>
 	<classpathentry kind="src" path="button"/>
 	<classpathentry kind="src" path="scene"/>
+	<classpathentry kind="src" path="effect"/>
+	<classpathentry kind="src" path="skill"/>
+	<classpathentry kind="src" path="sound"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

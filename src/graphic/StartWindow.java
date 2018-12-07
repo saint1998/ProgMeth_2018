@@ -80,7 +80,8 @@ public class StartWindow {
 				}
 			if (KeyEvent.getCode() == KeyCode.SPACE) {
 				if (numberselected == 0) {
-					// TODO Auto-generated method stub
+					GameWindow game = new GameWindow(primaryStage);
+					game.drawGameWindow();
 				}
 				if (numberselected == 1) {
 					// TODO Auto-generated method stub

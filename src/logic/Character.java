@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import sharedObject.RenderableHolder;
 
 public class Character extends Entity {
 	private String control;
@@ -38,8 +39,17 @@ public class Character extends Entity {
 		life++;
 	}
 
-	public void damaged() {
-		life--;
+	public boolean damaged(double x, double y) {
+		if(Math.abs(this.x-x)<=charpic.getWidth() && Math.abs(this.y-y)<=charpic.getHeight()) {
+			life--;
+			return true;
+		}
+		return false;
+	}
+	
+	public void attack(char c) {
+		Fireball fireball = new Fireball(x, y, c);
+		RenderableHolder.getinstance().add(fireball);
 	}
 
 	public void draw(GraphicsContext gc) {
@@ -50,20 +60,20 @@ public class Character extends Entity {
 	}
 
 	public void updatePos() {
-		if (control.contains("a") && x >= 0) {
+		if (control.contains("a")) {
 			x -= speed;
 			charpic = left.get(timeOfpic / 10);
 		}
-		if (control.contains("d") && x >= 0) {
+		if (control.contains("d") ) {
 			x += speed;
 			charpic = right.get(timeOfpic / 10);
 		}
-		if (control.contains("w") && x >= 0) {
+		if (control.contains("w")) {
 			y -= speed;
 			charpic = up.get(timeOfpic / 10);
 		}
-		if (control.contains("s") && x >= 0) {
-			x -= speed;
+		if (control.contains("s") ) {
+			y += speed;
 			charpic = down.get(timeOfpic / 10);
 		}
 		if (life < 0) {
@@ -107,6 +117,10 @@ public class Character extends Entity {
 
 	public void setMaxExp(int maxExp) {
 		this.maxExp = maxExp;
+	}
+	
+	public void setControl(String control) {
+		this.control =control;
 	}
 
 }

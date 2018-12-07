@@ -1,5 +1,7 @@
 package graphic;
 
+import java.util.Random;
+
 import com.sun.glass.events.KeyEvent;
 
 import javafx.animation.AnimationTimer;
@@ -9,13 +11,20 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import logic.Character;
+import logic.Drops;
+import sharedObject.RenderableHolder;
 
 public class GameWindow extends Canvas {
 	private static AnimationTimer gameWindowAnimation;
+	private Random rand = new Random();
+	private GameScreen gameScreen;
 	private String control = "";
 	private GraphicsContext gc;
 	private Scene scene;
 	private Stage primaryStage;
+	private Character character;
+	private int monsteramount;
 	private char c = 's';
 	private int frame = 0;
 
@@ -28,60 +37,116 @@ public class GameWindow extends Canvas {
 		root.getChildren().add(gc.getCanvas());
 		scene = new Scene(root);
 		this.primaryStage.setScene(scene);
+		addAll();
 		requestFocus();
 	}
 
 	public void drawGameWindow() {
 		frame = 0;
+		addMoving(gc);
 		gameWindowAnimation = new AnimationTimer() {
 
 			@Override
 			public void handle(long now) {
 				// TODO Auto-generated method stub
+				updateDetail();
 
 			}
 		};
+		gameWindowAnimation.start();
 	}
 
 	public void addMoving(GraphicsContext gc) {
 		this.setOnKeyPressed((KeyEvent) -> {
-			if (KeyEvent.getCode() == KeyCode.LEFT) {
-
+			if (KeyEvent.getCode() == KeyCode.LEFT){
+				control += "a";
+				c = 'a';
+				System.out.println(control);
 			}
-
 			if (KeyEvent.getCode() == KeyCode.RIGHT) {
-
+				control += "d";
+				c = 'd';
+				System.out.println(control);
 			}
-
 			if (KeyEvent.getCode() == KeyCode.UP) {
-
+				control += "w";
+				c = 'w';
+				System.out.println(control);
 			}
-
 			if (KeyEvent.getCode() == KeyCode.DOWN) {
-
+				control += "s";
+				c = 's';
+				System.out.println(control);
 			}
-
 			if (KeyEvent.getCode() == KeyCode.SPACE) {
-
+				character.attack(c);
 			}
+
 		});
 		this.setOnKeyReleased((KeyEvent) -> {
 			if (KeyEvent.getCode() == KeyCode.LEFT) {
-
+				control = control.replace("a", "");
+				RenderableHolder.getinstance().updatePos(control);
 			}
+
 			if (KeyEvent.getCode() == KeyCode.RIGHT) {
-
+				control = control.replace("d", "");
+				RenderableHolder.getinstance().updatePos(control);
 			}
+
 			if (KeyEvent.getCode() == KeyCode.UP) {
-
+				control = control.replace("w", "");
+				RenderableHolder.getinstance().updatePos(control);
 			}
+
 			if (KeyEvent.getCode() == KeyCode.DOWN) {
-
+				control = control.replace("s", "");
+				RenderableHolder.getinstance().updatePos(control);
 			}
+
+			if (KeyEvent.getCode() == KeyCode.SPACE) {
+				RenderableHolder.getinstance().updatePos(control);
+			}
+
 		});
-		
+
 	}
-	
+
+	public void updateDetail() {
+		frame++;
+		if (frame % 600 < 500) {
+			if (frame % 60 == 0) {
+				addMonster();
+			}
+		}
+		RenderableHolder.getinstance().remove();
+		RenderableHolder.getinstance().draw(gc);
+		RenderableHolder.getinstance().updatePos(control);
+
+	}
+
+	public void addAll() {
+		addGameScreen();
+		addCharacter();
+		addMonster();
+	}
+
+	public void addGameScreen() {
+		gameScreen = new GameScreen();
+		RenderableHolder.getinstance().add(gameScreen);
+	}
+
+	public void addCharacter() {
+		character = new Character();
+		RenderableHolder.getinstance().add(character);
+	}
+
+	public void addMonster() {
+		int i = rand.nextInt(4);
+		Drops drop = new Drops(character);
+		RenderableHolder.getinstance().add(drop);
+	}
+
 	public static AnimationTimer geAnimationTimer() {
 		return gameWindowAnimation;
 	}

@@ -42,6 +42,7 @@ public class Character extends Entity {
 	public boolean damaged(double x, double y) {
 		if(Math.abs(this.x-x)<= 21 && Math.abs(this.y-y)<=20) {
 			life--;
+			System.out.println("ch damaged");
 			return true;
 		}
 		return false;

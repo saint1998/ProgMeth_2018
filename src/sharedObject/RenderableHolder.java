@@ -28,6 +28,14 @@ public class RenderableHolder {
 	public void draw(GraphicsContext gc) {
 		for (int i = 0; i < object.size(); i++) {
 			object.get(i).draw(gc);
+//			System.out.println(object.get(i).getClass());
+//			if(object.get(i) instanceof Monster) {
+//				object.get(i).draw(gc);
+//				System.out.println("draw monster");
+//
+//			}
+//			else object.get(i).draw(gc);
+
 		}
 	}
 
@@ -35,6 +43,7 @@ public class RenderableHolder {
 		int n = object.size();
 		for (int i = n - 1; i >= 0; i--) {
 			if (object.get(i).isVisible() == false) {
+				System.out.println("remove");
 				object.remove(i);
 			}
 		}
@@ -57,15 +66,14 @@ public class RenderableHolder {
 
 	public void Collision(Character character) {
 
-			for (IRenderable i : object) {
-				if (i instanceof Monster) {
-					if (character.damaged(((Monster) i).getX(), ((Monster) i).getY())) {
-						((Monster) i).setVisible(false);
-					}
+		for (IRenderable i : object) {
+			if (i instanceof Monster) {
+				if (character.damaged(((Monster) i).getX(), ((Monster) i).getY())) {
+					System.out.println("monster attack");
+					((Monster) i).setVisible(false);
 				}
 			}
-		
-
+		}
 
 	}
 
@@ -76,10 +84,11 @@ public class RenderableHolder {
 				for (IRenderable j : object) {
 					if (j instanceof Fireball) {
 						if (((Monster) i).damaged(((Fireball) j).getX(), ((Fireball) j).getY())) {
-							if(((Monster) i).getHp() == 0) {
-							((Monster) i).setVisible(false);
-							((Fireball) j).setVisible(false);
-							exp += 10;
+							if (((Monster) i).getHp() == 0) {
+								System.out.println("monster is damaged");
+								((Monster) i).setVisible(false);
+								((Fireball) j).setVisible(false);
+								exp += 10;
 							}
 						}
 					}

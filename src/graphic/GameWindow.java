@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import logic.Character;
 import logic.Drops;
+import logic.Hydra;
 import logic.Monster;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
@@ -30,6 +31,7 @@ public class GameWindow extends Canvas {
 	private int monsteramount;
 	private char c = 's';
 	private int frame = 0;
+	private boolean isPaused = false;
 
 	public GameWindow(Stage primaryStage) {
 		setWidth(800);
@@ -84,6 +86,16 @@ public class GameWindow extends Canvas {
 			if (KeyEvent.getCode() == KeyCode.SPACE) {
 				character.attack(c);
 			}
+			if(KeyEvent.getCode() == KeyCode.P) {
+				if(!isPaused) {
+					gameWindowAnimation.stop();
+					isPaused = true;
+					}
+				else {
+					gameWindowAnimation.start();
+					isPaused = false;
+				}
+			}
 
 		});
 		this.setOnKeyReleased((KeyEvent) -> {
@@ -117,11 +129,11 @@ public class GameWindow extends Canvas {
 
 	public void updateDetail() {
 		frame++;
-		if (frame % 600 < 500) {
-			if (frame % 60 == 0) {
-				addMonster();
-			}
-		}
+//		if (frame % 600 < 500) {
+//			if (frame % 60 == 0) {
+//				addMonster();
+//			}
+//		}
 		RenderableHolder.getinstance().remove();
 		RenderableHolder.getinstance().draw(gc);
 		RenderableHolder.getinstance().updatePos(control);
@@ -133,7 +145,7 @@ public class GameWindow extends Canvas {
 	}
 
 	public void addAll() {
-		addGameScreen();
+//		addGameScreen();
 		addCharacter();
 		addMonster();
 	}
@@ -149,8 +161,9 @@ public class GameWindow extends Canvas {
 	}
 
 	public void addMonster() {
-		int i = rand.nextInt(4);
-		monster = new Drops(character);
+		int i = rand.nextInt(2);
+		if(i == 0) monster = new Drops(character);
+		if(i == 1) monster = new Hydra(character);
 		RenderableHolder.getinstance().add(monster);
 	}
 

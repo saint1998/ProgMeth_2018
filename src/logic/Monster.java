@@ -53,6 +53,7 @@ public abstract class Monster extends Entity{
 	}
 
 	public void setVisible(boolean isVisible) {
+		System.out.println("set invis monster");
 		this.isVisible = isVisible;
 	}
 	

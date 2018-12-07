@@ -1,6 +1,8 @@
 package graphic;
 
 import com.sun.glass.events.KeyEvent;
+import com.sun.xml.internal.bind.v2.TODO;
+import javafx.application.Platform;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
@@ -28,11 +30,13 @@ public class StartWindow {
 		this.primaryStage = primaryStage;
 		this.bg = new Canvas(800, 480);
 		this.gc = bg.getGraphicsContext2D();
+		// TODO Auto-generated method stub ใส่เสียงด้วย
+
 	}
 
 	public void draw(GraphicsContext gc) {
 		StackPane root = new StackPane();
-		root.setPrefSize(800, 480);		
+		root.setPrefSize(800, 480);
 		setBackground();
 		addAction();
 		root.getChildren().add(bg);
@@ -44,8 +48,8 @@ public class StartWindow {
 		gameAnimationTimer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-					setBackground();
-				
+				setBackground();
+
 			}
 		};
 		gameAnimationTimer.start();
@@ -63,32 +67,44 @@ public class StartWindow {
 
 	public void addAction() {
 		bg.setOnKeyPressed((KeyEvent) -> {
-				if (KeyEvent.getCode() == KeyCode.UP) {
-					if (numberselected != 0) {
-						numberselected--;
-						drawSelected();
-					}
+			if (KeyEvent.getCode() == KeyCode.UP) {
+				if (numberselected != 0) {
+					numberselected--;
+					drawSelected();
 				}
-				if(KeyEvent.getCode() == KeyCode.DOWN)
-					if(numberselected != 1) {
-						numberselected++;
-						drawSelected();
-					}
-			
+			}
+			if (KeyEvent.getCode() == KeyCode.DOWN)
+				if (numberselected != 1) {
+					numberselected++;
+					drawSelected();
+				}
+			if (KeyEvent.getCode() == KeyCode.SPACE) {
+				if (numberselected == 0) {
+					// TODO Auto-generated method stub
+				}
+				if (numberselected == 1) {
+					// TODO Auto-generated method stub
+
+				}
+			}
+			if (KeyEvent.getCode() == KeyCode.ESCAPE) {
+				Platform.exit();
+			}
+
 		});
 	}
 
 	public void drawSelected() {
 		setMenu();
-		if(numberselected == 0) {
+		if (numberselected == 0) {
 			gc.drawImage(cursur, 430, 400);
 		}
-		if(numberselected == 1) {
+		if (numberselected == 1) {
 			gc.drawImage(cursur, 430, 440);
 		}
 
 	}
-	
+
 	public void setMenu() {
 		setStart();
 		setHowto();
@@ -98,15 +114,14 @@ public class StartWindow {
 		Image start = new Image(ClassLoader.getSystemResource("button_start.png").toString());
 		gc.drawImage(start, 310, 380);
 	}
-	
+
 	public void setHowto() {
 		Image howTo = new Image(ClassLoader.getSystemResource("button_howto.png").toString());
 		gc.drawImage(howTo, 310, 419);
 	}
-	
+
 	public void startAnimation() {
 		draw(gc);
 	}
-	
 
 }

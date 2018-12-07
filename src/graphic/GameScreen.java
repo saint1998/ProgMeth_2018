@@ -15,6 +15,7 @@ public class GameScreen implements IRenderable{
 	public void draw(GraphicsContext gc) {
 		gc.drawImage(bggame, 0, 0);
 		
+		
 	}
 	
 	public boolean isVisible() {

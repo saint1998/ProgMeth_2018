@@ -26,21 +26,28 @@ public abstract class Monster extends Entity{
 	}
 		
 	public double calx(double x, double y) {
-		
-		return  (x-this.x)/(Math.sqrt(((y-this.y)*(x-this.x))+((x-this.x)*(x-this.x))));
+		double a = y-this.y;
+		double b = x-this.x;
+		double c = Math.sqrt((a*a)+(b*b));
+		double cos = b/c;	
+		return cos;
 	}
 	
 	public double caly(double x, double y) {
-		return (y-this.y)/(Math.sqrt(((y-this.y)*(x-this.x))+((x-this.x)*(x-this.x))));
-	}
+		double a = y-this.y;
+		double b = x-this.x;
+		double c = Math.sqrt((a*a)+(b*b));
+		double sin = a/c;
+		return sin;	}
 	
 	public boolean isVisible() {
 		return isVisible;
 	}
 	
 	public boolean damaged(double x, double y) {
-		if(Math.abs(this.x-x)<= 21 && Math.abs(this.y-y)<=20) {
+		if(Math.abs(this.x-x)<= monsterpic.getWidth() && Math.abs(this.y-y)<=monsterpic.getHeight()) {
 			hp--;
+			System.out.println(hp);
 			return true;
 		}
 		return false;

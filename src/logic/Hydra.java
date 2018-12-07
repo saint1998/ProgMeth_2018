@@ -11,7 +11,7 @@ public class Hydra extends Monster{
 	private int timeOfPic;
 	
 	public Hydra(Character character) {
-		super(2,0.3);
+		super(5,0.3);
 		for(int i = 1;i < 7; ++i ) {
 			monsterpics.add(new Image(ClassLoader.getSystemResource("hydra"+i+".png").toString()));
 		}
@@ -29,7 +29,6 @@ public class Hydra extends Monster{
 	}
 	
 	public  void updatePos() {
-		if(character.damaged(x,y)) isVisible = false;
 		x += speed*calx(character.getX(),character.getY());
 		y += speed*caly(character.getX(),character.getY());
 	}

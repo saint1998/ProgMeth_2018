@@ -129,11 +129,11 @@ public class GameWindow extends Canvas {
 
 	public void updateDetail() {
 		frame++;
-//		if (frame % 600 < 500) {
-//			if (frame % 60 == 0) {
-//				addMonster();
-//			}
-//		}
+		if (frame % 600 < 500) {
+			if (frame % 60 == 0) {
+				addMonster();
+			}
+		}
 		RenderableHolder.getinstance().remove();
 		RenderableHolder.getinstance().draw(gc);
 		RenderableHolder.getinstance().updatePos(control);
@@ -145,7 +145,7 @@ public class GameWindow extends Canvas {
 	}
 
 	public void addAll() {
-//		addGameScreen();
+		addGameScreen();
 		addCharacter();
 		addMonster();
 	}

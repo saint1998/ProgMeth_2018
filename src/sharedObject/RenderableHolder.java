@@ -84,6 +84,7 @@ public class RenderableHolder {
 				for (IRenderable j : object) {
 					if (j instanceof Fireball) {
 						if (((Monster) i).damaged(((Fireball) j).getX(), ((Fireball) j).getY())) {
+							((Fireball) j).setVisible(false);
 							if (((Monster) i).getHp() == 0) {
 								System.out.println("monster is damaged");
 								((Monster) i).setVisible(false);

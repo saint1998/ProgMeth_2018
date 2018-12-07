@@ -13,7 +13,7 @@ public class Drops extends Monster{
 
 
 	public Drops(Character character) {
-		super(1,0.7);
+		super(1,1.2);
 		for(int i = 1 ; i<5 ; ++i) {
 			monsterpics.add(new Image(ClassLoader.getSystemResource("drop" + i + ".png").toString()));
 		}
@@ -26,10 +26,10 @@ public class Drops extends Monster{
 		if(timeOfPic >=40) timeOfPic = 0;
 		monsterpic = monsterpics.get(timeOfPic/10);
 		gc.drawImage(monsterpic, x, y);
+		System.out.println("draw drop");
 	}
 	
 	public  void updatePos() {
-		if(character.damaged(x,y)) isVisible = false;
 		x += speed*calx(character.getX(),character.getY());
 		y += speed*caly(character.getX(),character.getY());
 	}

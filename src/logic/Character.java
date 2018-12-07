@@ -40,7 +40,7 @@ public class Character extends Entity {
 	}
 
 	public boolean damaged(double x, double y) {
-		if(Math.abs(this.x-x)<= 21 && Math.abs(this.y-y)<=20) {
+		if(Math.abs(this.x-x)<= charpic.getWidth() && Math.abs(this.y-y)<=charpic.getHeight()) {
 			life--;
 			System.out.println("ch damaged");
 			return true;
@@ -61,19 +61,19 @@ public class Character extends Entity {
 	}
 
 	public void updatePos() {
-		if (control.contains("a")) {
+		if (control.contains("a") && x> 0) {
 			x -= speed;
 			charpic = left.get(timeOfpic / 10);
 		}
-		if (control.contains("d") ) {
+		if (control.contains("d") && x < 800-charpic.getWidth()) {
 			x += speed;
 			charpic = right.get(timeOfpic / 10);
 		}
-		if (control.contains("w")) {
+		if (control.contains("w") && y > 0) {
 			y -= speed;
 			charpic = up.get(timeOfpic / 10);
 		}
-		if (control.contains("s") ) {
+		if (control.contains("s") && y < 480 - charpic.getHeight() ) {
 			y += speed;
 			charpic = down.get(timeOfpic / 10);
 		}

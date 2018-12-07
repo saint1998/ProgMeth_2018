@@ -130,7 +130,7 @@ public class GameWindow extends Canvas {
 	public void updateDetail() {
 		frame++;
 		if (frame % 600 < 500) {
-			if (frame % 60 == 0) {
+			if (frame % 50 == 0) {
 				addMonster();
 			}
 		}
@@ -140,6 +140,8 @@ public class GameWindow extends Canvas {
 		int exp = RenderableHolder.getinstance().killmonster();
 		RenderableHolder.getinstance().Collision(character);
 		character.setExp(character.getExp()+exp);
+		character.updateLv();
+		gameScreen.setCharacterData(character.getLv(), character.getExp(), character.getMaxExp(), character.getLife());
 
 
 	}

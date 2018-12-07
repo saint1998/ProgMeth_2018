@@ -77,9 +77,17 @@ public class Character extends Entity {
 			y += speed;
 			charpic = down.get(timeOfpic / 10);
 		}
-		if (life < 0) {
+		if (life == 0) {
 			charpic = deadpic;
 			speed = 0;
+		}
+	}
+	
+	public void updateLv() {
+		if(exp >= maxExp) {
+			lv++;
+			exp = 0;
+			maxExp *= 1.5;
 		}
 	}
 

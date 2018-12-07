@@ -29,9 +29,9 @@ public class Drops extends Monster{
 	}
 	
 	public  void updatePos() {
+		if(character.damaged(x,y)) isVisible = false;
 		x += speed*calx(character.getX(),character.getY());
 		y += speed*caly(character.getX(),character.getY());
-		if(character.damaged(x,y)) isVisible = false;
 	}
 	
 

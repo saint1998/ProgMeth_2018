@@ -13,6 +13,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import logic.Character;
 import logic.Drops;
+import logic.Monster;
+import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
 public class GameWindow extends Canvas {
@@ -24,6 +26,7 @@ public class GameWindow extends Canvas {
 	private Scene scene;
 	private Stage primaryStage;
 	private Character character;
+	private Monster monster;
 	private int monsteramount;
 	private char c = 's';
 	private int frame = 0;
@@ -122,6 +125,10 @@ public class GameWindow extends Canvas {
 		RenderableHolder.getinstance().remove();
 		RenderableHolder.getinstance().draw(gc);
 		RenderableHolder.getinstance().updatePos(control);
+		int exp = RenderableHolder.getinstance().killmonster();
+		RenderableHolder.getinstance().Collision(character);
+		character.setExp(character.getExp()+exp);
+
 
 	}
 
@@ -143,8 +150,8 @@ public class GameWindow extends Canvas {
 
 	public void addMonster() {
 		int i = rand.nextInt(4);
-		Drops drop = new Drops(character);
-		RenderableHolder.getinstance().add(drop);
+		monster = new Drops(character);
+		RenderableHolder.getinstance().add(monster);
 	}
 
 	public static AnimationTimer geAnimationTimer() {

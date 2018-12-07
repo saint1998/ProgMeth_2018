@@ -26,22 +26,24 @@ public abstract class Monster extends Entity{
 	}
 		
 	public double calx(double x, double y) {
-		return  (y-this.y)/(Math.sqrt(((y-this.y)*(y-this.y))+((x-this.x)*(x-this.x))));
+		
+		return  (x-this.x)/(Math.sqrt(((y-this.y)*(x-this.x))+((x-this.x)*(x-this.x))));
 	}
 	
 	public double caly(double x, double y) {
-		return (x-this.x)/(Math.sqrt(((y-this.y)*(y-this.y))+((x-this.x)*(x-this.x))));
+		return (y-this.y)/(Math.sqrt(((y-this.y)*(x-this.x))+((x-this.x)*(x-this.x))));
 	}
 	
 	public boolean isVisible() {
 		return isVisible;
 	}
 	
-	public void damaged(double x, double y) {
-		if(this.x-x <= monsterpic.getWidth() && this.y - y <= monsterpic.getHeight()) {
+	public boolean damaged(double x, double y) {
+		if(Math.abs(this.x-x)<= 21 && Math.abs(this.y-y)<=20) {
 			hp--;
-			if(hp == 0) isVisible = false;
+			return true;
 		}
+		return false;
 	}
 	
 	public abstract void updatePos();

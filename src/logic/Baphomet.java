@@ -14,7 +14,7 @@ public class Baphomet extends Monster{
 
 
 	public Baphomet(Character character) {
-		super(100,0.5);
+		super(100,1.0);
 		this.x =0;
 		this.y = 0;
 		for(int i = 1 ; i<5 ; ++i) {
@@ -26,7 +26,7 @@ public class Baphomet extends Monster{
 	}
 	@Override
 	public void draw(GraphicsContext gc) {
-		gc.fillRect(x, y, monsterpic.getWidth(), monsterpic.getHeight());
+//		gc.fillRect(x, y, monsterpic.getWidth(), monsterpic.getHeight());
 		timeOfPic++;
 		if(timeOfPic >=40) timeOfPic = 0;
 		gc.drawImage(monsterpic, x, y);

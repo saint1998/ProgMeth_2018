@@ -66,7 +66,7 @@ public class Character extends Entity {
 	}
 
 	public void draw(GraphicsContext gc) {
-		gc.fillRect(x, y, charpic.getWidth(), charpic.getHeight());
+//		gc.fillRect(x, y, charpic.getWidth(), charpic.getHeight());
 		timeOfpic++;
 		if (timeOfpic >= 50)
 			timeOfpic = 0;

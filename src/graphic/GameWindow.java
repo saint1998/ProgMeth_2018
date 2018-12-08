@@ -5,6 +5,7 @@ import java.util.Random;
 import com.sun.glass.events.KeyEvent;
 
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -109,6 +110,9 @@ public class GameWindow extends Canvas {
 					GameWin.stopsound();
 					GameOver.stopsound();
 				}
+			}
+			if (KeyEvent.getCode() == KeyCode.ESCAPE) {
+				Platform.exit();
 			}
 //			if(KeyEvent.getCode() == KeyCode.Z) {
 //				if(cooldownWW == 0) {

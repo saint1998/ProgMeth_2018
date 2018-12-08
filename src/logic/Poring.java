@@ -23,7 +23,7 @@ public class Poring extends Monster{
 	}
 	@Override
 	public void draw(GraphicsContext gc) {
-		gc.fillRect(x, y, monsterpic.getWidth(), monsterpic.getHeight());
+//		gc.fillRect(x, y, monsterpic.getWidth(), monsterpic.getHeight());
 		timeOfPic++;
 		if(timeOfPic >=40) timeOfPic = 0;
 		gc.drawImage(monsterpic, x, y);

@@ -33,8 +33,9 @@ public class GameWindow extends Canvas {
 	private Character character;
 	private Monster monster;
 	private int monsteramount;
+	private int gameEndingtime = 50;
 	private char c = 's';
-	private int frame = 0;
+	private int frame = 0, cooldownWW;
 	private boolean isPaused = false;
 	private AudioClip soundbg, soundboss;
 	private boolean isBoss, isBossAdded, isGameEnd, isWin;
@@ -95,8 +96,26 @@ public class GameWindow extends Canvas {
 				System.out.println(control);
 			}
 			if (KeyEvent.getCode() == KeyCode.SPACE) {
-				character.attack(c);
+				if (!isGameEnd)
+					character.attack(c);
 			}
+			if (KeyEvent.getCode() == KeyCode.ENTER) {
+				if (isGameEnd) {
+					isGameEnd = false;
+					isBoss = false;
+					StartWindow start = new StartWindow(primaryStage);
+					start.startAnimation();
+					RenderableHolder.getinstance().clearList();
+					GameWin.stopsound();
+					GameOver.stopsound();
+				}
+			}
+//			if(KeyEvent.getCode() == KeyCode.Z) {
+//				if(cooldownWW == 0) {
+//					character.skillWW();
+//					cooldownWW = 500;
+//				}
+//			}
 			if (KeyEvent.getCode() == KeyCode.P) {
 				if (!isPaused) {
 					gameWindowAnimation.stop();
@@ -161,6 +180,12 @@ public class GameWindow extends Canvas {
 					character.getLife());
 			if (character.getLv() == 9)
 				isBoss = true;
+			if (character.getLife() == 0) {
+				if (gameEndingtime != 0)
+					gameEndingtime--;
+				isGameEnd = true;
+			}
+
 		}
 		if (isBoss) {
 			if (!isBossAdded) {
@@ -173,27 +198,38 @@ public class GameWindow extends Canvas {
 			int exp = RenderableHolder.getinstance().killmonster();
 			RenderableHolder.getinstance().Collision(character);
 			if (RenderableHolder.getinstance().isBossKilled()) {
+				if (gameEndingtime != 0)
+					gameEndingtime--;
 				isGameEnd = true;
 				isWin = true;
 			}
 			if (character.getLife() == 0) {
+				if (gameEndingtime != 0)
+					gameEndingtime--;
 				isGameEnd = true;
 				isWin = false;
 			}
 		}
-		if(isGameEnd) {
-			
+		if (gameEndingtime == 0) {
+			gameEndingtime = 50;
+			gameWindowAnimation.stop();
+			if (isWin)
+				GameWin.startAnimation(gc);
+			else
+				GameOver.startAnimation(gc);
+			soundbg.stop();
+			soundboss.stop();
 		}
 
 	}
 
 	public void updateSound() {
-		if (!isBoss) {
+		if (!isBoss && !isGameEnd) {
 			if (!soundbg.isPlaying()) {
 				soundbg.play();
 			}
 		}
-		if (isBoss) {
+		if (isBoss && !isGameEnd) {
 			soundbg.stop();
 			if (!soundboss.isPlaying()) {
 				soundboss.play();
@@ -202,9 +238,12 @@ public class GameWindow extends Canvas {
 	}
 
 //	public void updateState() {
+//		
 //		if(isGameEnd) {
-//			GameOver.startAnimation(gc);
+//			RenderableHolder.getinstance().draw(gc);
+//			RenderableHolder.getinstance().updatePos(control);
 //			gameWindowAnimation.stop();
+//			GameOver.startAnimation(gc);
 //			soundbg.stop();
 //			soundboss.stop();
 //		}

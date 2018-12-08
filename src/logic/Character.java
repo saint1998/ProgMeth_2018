@@ -22,8 +22,8 @@ public class Character extends Entity {
 	private List<Image> right = new ArrayList<>();
 	private List<Image> up = new ArrayList<>();
 	private List<Image> down = new ArrayList<>();
-	private Image charpic;
-	private Image deadpic;
+	private Image charpic,deadpic;
+
 	private AudioClip levelup,firesound,damage;
 
 	public Character() {
@@ -100,11 +100,18 @@ public class Character extends Entity {
 
 	public void updateLv() {
 		if (exp >= maxExp) {
+			Levelup lvup = new Levelup(x, y);
+			RenderableHolder.getinstance().add(lvup);
 			lv++;
 			exp = 0;
 			maxExp += 10;
 			levelup.play();
 		}
+	}
+	
+	public void skillWW() {
+		Windwalk ww = new Windwalk(x, y);
+		RenderableHolder.getinstance().add(ww);
 	}
 
 	private boolean checkIntersect(double x, double y, Image pic) {

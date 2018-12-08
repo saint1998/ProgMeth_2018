@@ -108,4 +108,9 @@ public class RenderableHolder {
 		}
 		return true;
 	}
+	
+	public void clearList() {
+		this.object = null;
+		this.object = new ArrayList<>();
+	}
 }

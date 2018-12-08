@@ -16,7 +16,7 @@ public class Character extends Entity {
 	private int exp = 0;
 	private int lv = 1;
 	private int maxExp = 50;
-	private int speed = 4;
+	private int speed = 2;
 	private int timeOfpic = 0;
 	private List<Image> left = new ArrayList<>();
 	private List<Image> right = new ArrayList<>();
@@ -44,19 +44,25 @@ public class Character extends Entity {
 	}
 
 	public boolean damaged(double x, double y, Monster monster) {
-		if (checkIntersect(x, y, monster.getMonsterpic())) {
-			life--;
-			return true;
+		if (life > 0) {
+			if (checkIntersect(x, y, monster.getMonsterpic())) {
+				life--;
+				if(monster instanceof Baphomet) life = 0;
+				return true;
+			}
 		}
 		return false;
 	}
 
 	public void attack(char c) {
-		Fireball fireball = new Fireball(x, y, c);
-		RenderableHolder.getinstance().add(fireball);
+		if (life > 0) {
+			Fireball fireball = new Fireball(x, y, c);
+			RenderableHolder.getinstance().add(fireball);
+		}
 	}
 
 	public void draw(GraphicsContext gc) {
+		gc.fillRect(x, y, charpic.getWidth(), charpic.getHeight());
 		timeOfpic++;
 		if (timeOfpic >= 50)
 			timeOfpic = 0;
@@ -64,6 +70,7 @@ public class Character extends Entity {
 	}
 
 	public void updatePos() {
+
 		if (control.contains("a") && x > 0) {
 			x -= speed;
 			charpic = left.get(timeOfpic / 10);
@@ -80,6 +87,7 @@ public class Character extends Entity {
 			y += speed;
 			charpic = down.get(timeOfpic / 10);
 		}
+
 		if (life == 0) {
 			charpic = deadpic;
 			speed = 0;
@@ -90,13 +98,13 @@ public class Character extends Entity {
 		if (exp >= maxExp) {
 			lv++;
 			exp = 0;
-			maxExp *= 1.5;
+			maxExp += 10;
 			levelup.play();
 		}
 	}
 
-	private boolean checkIntersect(double x, double y, Image monsterpic) {
-		Rectangle r = new Rectangle(x, y, monsterpic.getWidth(), monsterpic.getHeight());
+	private boolean checkIntersect(double x, double y, Image pic) {
+		Rectangle r = new Rectangle(x, y, pic.getWidth(), pic.getHeight());
 		if (r.intersects(this.x, this.y, charpic.getWidth(), charpic.getHeight())) {
 			return true;
 		}

@@ -7,6 +7,7 @@ import java.util.Random;
 import graphic.GameScreen;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Rectangle;
 
 public abstract class Monster extends Entity {
 	private Random rand = new Random();
@@ -44,9 +45,8 @@ public abstract class Monster extends Entity {
 		return isVisible;
 	}
 
-	public boolean damaged(double x, double y) {
-		if (x - this.x <= monsterpic.getWidth() && x - this.x >= 0 && y - this.y <= monsterpic.getHeight()
-				&& y - this.y >= 0) {
+	public boolean damaged(double x, double y,Fireball fireball) {
+		if (checkIntersect(x, y, fireball.getFireballpic())) {
 			hp--;
 			System.out.println(hp);
 			return true;
@@ -62,6 +62,14 @@ public abstract class Monster extends Entity {
 	
 	public Image getMonsterpic() {
 		return monsterpic;
+	}
+	
+	private boolean checkIntersect(double x, double y, Image pic) {
+		Rectangle r = new Rectangle(x, y, pic.getWidth(), pic.getHeight());
+		if (r.intersects(this.x, this.y, monsterpic.getWidth(), monsterpic.getHeight())) {
+			return true;
+		}
+		return false;
 	}
 
 	public void setVisible(boolean isVisible) {

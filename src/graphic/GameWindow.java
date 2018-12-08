@@ -37,6 +37,8 @@ public class GameWindow extends Canvas {
 	private int frame = 0;
 	private boolean isPaused = false;
 	private AudioClip soundbg;
+	private boolean isBoss;
+	private boolean isBossAdded;
 
 	public GameWindow(Stage primaryStage) {
 		setWidth(800);
@@ -62,6 +64,7 @@ public class GameWindow extends Canvas {
 			public void handle(long now) {
 				// TODO Auto-generated method stub
 				updateDetail();
+				updateSound();
 
 			}
 		};
@@ -69,8 +72,9 @@ public class GameWindow extends Canvas {
 	}
 
 	public void addMoving(GraphicsContext gc) {
+
 		this.setOnKeyPressed((KeyEvent) -> {
-			if (KeyEvent.getCode() == KeyCode.LEFT){
+			if (KeyEvent.getCode() == KeyCode.LEFT) {
 				control += "a";
 				c = 'a';
 				System.out.println(control);
@@ -93,18 +97,22 @@ public class GameWindow extends Canvas {
 			if (KeyEvent.getCode() == KeyCode.SPACE) {
 				character.attack(c);
 			}
-			if(KeyEvent.getCode() == KeyCode.P) {
-				if(!isPaused) {
+			if (KeyEvent.getCode() == KeyCode.P) {
+				if (!isPaused) {
 					gameWindowAnimation.stop();
 					isPaused = true;
-					}
-				else {
+				} else {
 					gameWindowAnimation.start();
 					isPaused = false;
 				}
 			}
+			if(KeyEvent.getCode() == KeyCode.B) {
+				isBoss = true;
+
+			}
 
 		});
+
 		this.setOnKeyReleased((KeyEvent) -> {
 			if (KeyEvent.getCode() == KeyCode.LEFT) {
 				control = control.replace("a", "");
@@ -136,20 +144,44 @@ public class GameWindow extends Canvas {
 
 	public void updateDetail() {
 		frame++;
-		if (frame % 600 < 500) {
-			if (frame % 50 == 0) {
-				addMonster();
+		if (!isBoss) {
+			if (frame % 600 < 500) {
+				if (frame % 50 == 0) {
+					addMonster();
+				}
 			}
+			RenderableHolder.getinstance().remove();
+			RenderableHolder.getinstance().draw(gc);
+			RenderableHolder.getinstance().updatePos(control);
+			int exp = RenderableHolder.getinstance().killmonster();
+			RenderableHolder.getinstance().Collision(character);
+			character.setExp(character.getExp() + exp);
+			character.updateLv();
+			gameScreen.setCharacterData(character.getLv(), character.getExp(), character.getMaxExp(),
+					character.getLife());
+			if(character.getLv() == 9) isBoss = true;
 		}
-		RenderableHolder.getinstance().remove();
-		RenderableHolder.getinstance().draw(gc);
-		RenderableHolder.getinstance().updatePos(control);
-		int exp = RenderableHolder.getinstance().killmonster();
-		RenderableHolder.getinstance().Collision(character);
-		character.setExp(character.getExp()+exp);
-		character.updateLv();
-		gameScreen.setCharacterData(character.getLv(), character.getExp(), character.getMaxExp(), character.getLife());
+		if(isBoss) {
+			if(!isBossAdded) {
+				addMonster();
+				isBossAdded = true;
+			}
+			RenderableHolder.getinstance().remove();
+			RenderableHolder.getinstance().draw(gc);
+			RenderableHolder.getinstance().updatePos(control);
+			int exp = RenderableHolder.getinstance().killmonster();
+			RenderableHolder.getinstance().Collision(character);
+			
+		}
+	}
 
+	public void updateSound() {
+		if (!soundbg.isPlaying()) {
+			soundbg.play();
+		}
+	}
+
+	public void updateState() {
 
 	}
 
@@ -170,12 +202,16 @@ public class GameWindow extends Canvas {
 	}
 
 	public void addMonster() {
-		int i = rand.nextInt(5);
-		if(i == 0) monster = new Drops(character);
-		if(i == 1) monster = new Hydra(character);
-		if(i == 2) monster = new Horong(character);
-		if(i == 3) monster = new Poring(character);
-		if(i == 4) monster = new Baphomet(character);
+		int i = character.getLv();
+		if (i >= 1 && i < 3)
+			monster = new Drops(character);
+		if (i >= 3 && i < 5)
+			monster = new Poring(character);
+		if (i >= 5 && i < 7)
+			monster = new Horong(character);
+		if (i >= 7 && i < 9)
+			monster = new Hydra(character);
+		if( isBoss) monster = new Baphomet(character);
 		RenderableHolder.getinstance().add(monster);
 	}
 

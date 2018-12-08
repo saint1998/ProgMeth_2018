@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Rectangle;
 
 public class Baphomet extends Monster{
 	private List<Image> monsterpics = new ArrayList<>();
@@ -13,7 +14,7 @@ public class Baphomet extends Monster{
 
 
 	public Baphomet(Character character) {
-		super(1,1.2);
+		super(100,0.5);
 		for(int i = 1 ; i<5 ; ++i) {
 			monsterpics.add(new Image(ClassLoader.getSystemResource("bapho" + i + ".png").toString()));
 			monsterpicsrv.add(new Image(ClassLoader.getSystemResource("ohpab" + i + ".png").toString()));
@@ -23,10 +24,11 @@ public class Baphomet extends Monster{
 	}
 	@Override
 	public void draw(GraphicsContext gc) {
+		gc.fillRect(x, y, monsterpic.getWidth(), monsterpic.getHeight());
 		timeOfPic++;
 		if(timeOfPic >=40) timeOfPic = 0;
 		gc.drawImage(monsterpic, x, y);
-		System.out.println("draw drop");
+		System.out.println("draw Baphomet");
 	}
 	
 	public  void updatePos() {

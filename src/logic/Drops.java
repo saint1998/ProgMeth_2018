@@ -14,7 +14,7 @@ public class Drops extends Monster{
 
 
 	public Drops(Character character) {
-		super(1,1.2);
+		super(1,0.5);
 		for(int i = 1 ; i<5 ; ++i) {
 			monsterpics.add(new Image(ClassLoader.getSystemResource("drop" + i + ".png").toString()));
 			monsterpicsrv.add(new Image(ClassLoader.getSystemResource("pord" + i + ".png").toString()));
@@ -24,6 +24,7 @@ public class Drops extends Monster{
 	}
 	@Override
 	public void draw(GraphicsContext gc) {
+		gc.fillRect(x, y, monsterpic.getWidth(), monsterpic.getHeight());
 		timeOfPic++;
 		if(timeOfPic >=40) timeOfPic = 0;
 		gc.drawImage(monsterpic, x, y);

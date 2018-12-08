@@ -11,7 +11,7 @@ public class Hydra extends Monster{
 	private int timeOfPic;
 	
 	public Hydra(Character character) {
-		super(5,0.3);
+		super(1,1);
 		for(int i = 1;i < 7; ++i ) {
 			monsterpics.add(new Image(ClassLoader.getSystemResource("hydra"+i+".png").toString()));
 		}
@@ -21,6 +21,7 @@ public class Hydra extends Monster{
 	}
 	@Override
 	public void draw(GraphicsContext gc) {
+		gc.fillRect(x, y, monsterpic.getWidth(), monsterpic.getHeight());
 		timeOfPic++;
 		if(timeOfPic >=60) timeOfPic = 0;
 		monsterpic = monsterpics.get(timeOfPic/10);

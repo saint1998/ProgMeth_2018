@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.canvas.GraphicsContext;
+import logic.Baphomet;
 import logic.Character;
 import logic.Entity;
 import logic.Fireball;
@@ -70,7 +71,7 @@ public class RenderableHolder {
 			if (i instanceof Monster) {
 				if (character.damaged(((Monster) i).getX(), ((Monster) i).getY(),((Monster)i))) {
 					System.out.println("monster attack");
-					((Monster) i).setVisible(false);
+					if(!(i instanceof Baphomet))((Monster) i).setVisible(false);
 				}
 			}
 		}
@@ -83,7 +84,7 @@ public class RenderableHolder {
 			if (i instanceof Monster) {
 				for (IRenderable j : object) {
 					if (j instanceof Fireball) {
-						if (((Monster) i).damaged(((Fireball) j).getX(), ((Fireball) j).getY())) {
+						if (((Monster) i).damaged(((Fireball) j).getX(), ((Fireball) j).getY(), (Fireball)j)) {
 							((Fireball) j).setVisible(false);
 							if (((Monster) i).getHp() == 0) {
 								System.out.println("monster is damaged");

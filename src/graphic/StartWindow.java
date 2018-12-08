@@ -56,6 +56,7 @@ public class StartWindow {
 			@Override
 			public void handle(long now) {
 				setBackground();
+				if(!sound.isPlaying()) sound.play();
 			}
 		};
 		gameAnimationTimer.start();
@@ -96,6 +97,7 @@ public class StartWindow {
 						GameWindow game = new GameWindow(primaryStage);
 						game.drawGameWindow();
 						sound.stop();
+						gameAnimationTimer.stop();
 					}
 					if (numberselected == 1) {
 						isHowto = true;
@@ -114,6 +116,7 @@ public class StartWindow {
 					GameWindow game = new GameWindow(primaryStage);
 					game.drawGameWindow();
 					sound.stop();
+					gameAnimationTimer.stop();
 				}
 				if (KeyEvent.getCode() == KeyCode.ESCAPE) {
 					Platform.exit();

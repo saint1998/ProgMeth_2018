@@ -12,7 +12,7 @@ public class Horong extends Monster {
 
 
 	public Horong(Character character) {
-		super(1,2);
+		super(1,1.3);
 		for(int i = 1 ; i<5 ; ++i) {
 			monsterpics.add(new Image(ClassLoader.getSystemResource("horong" + i + ".png").toString()));
 		}
@@ -21,6 +21,7 @@ public class Horong extends Monster {
 	}
 	@Override
 	public void draw(GraphicsContext gc) {
+		gc.fillRect(x, y, monsterpic.getWidth(), monsterpic.getHeight());
 		timeOfPic++;
 		if(timeOfPic >=40) timeOfPic = 0;
 		monsterpic = monsterpics.get(timeOfPic/10);

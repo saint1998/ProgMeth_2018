@@ -15,6 +15,8 @@ public class Baphomet extends Monster{
 
 	public Baphomet(Character character) {
 		super(100,0.5);
+		this.x =0;
+		this.y = 0;
 		for(int i = 1 ; i<5 ; ++i) {
 			monsterpics.add(new Image(ClassLoader.getSystemResource("bapho" + i + ".png").toString()));
 			monsterpicsrv.add(new Image(ClassLoader.getSystemResource("ohpab" + i + ".png").toString()));

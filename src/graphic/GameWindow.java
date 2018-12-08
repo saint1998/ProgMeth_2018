@@ -36,9 +36,8 @@ public class GameWindow extends Canvas {
 	private char c = 's';
 	private int frame = 0;
 	private boolean isPaused = false;
-	private AudioClip soundbg;
-	private boolean isBoss;
-	private boolean isBossAdded;
+	private AudioClip soundbg, soundboss;
+	private boolean isBoss, isBossAdded, isGameEnd, isWin;
 
 	public GameWindow(Stage primaryStage) {
 		setWidth(800);
@@ -51,6 +50,7 @@ public class GameWindow extends Canvas {
 		this.primaryStage.setScene(scene);
 		addAll();
 		soundbg = new AudioClip(ClassLoader.getSystemResource("ingame.mp3").toString());
+		soundboss = new AudioClip(ClassLoader.getSystemResource("boss.mp3").toString());
 		soundbg.play();
 		requestFocus();
 	}
@@ -65,7 +65,7 @@ public class GameWindow extends Canvas {
 				// TODO Auto-generated method stub
 				updateDetail();
 				updateSound();
-
+//				updateState();
 			}
 		};
 		gameWindowAnimation.start();
@@ -106,7 +106,7 @@ public class GameWindow extends Canvas {
 					isPaused = false;
 				}
 			}
-			if(KeyEvent.getCode() == KeyCode.B) {
+			if (KeyEvent.getCode() == KeyCode.B) {
 				isBoss = true;
 
 			}
@@ -159,10 +159,11 @@ public class GameWindow extends Canvas {
 			character.updateLv();
 			gameScreen.setCharacterData(character.getLv(), character.getExp(), character.getMaxExp(),
 					character.getLife());
-			if(character.getLv() == 9) isBoss = true;
+			if (character.getLv() == 9)
+				isBoss = true;
 		}
-		if(isBoss) {
-			if(!isBossAdded) {
+		if (isBoss) {
+			if (!isBossAdded) {
 				addMonster();
 				isBossAdded = true;
 			}
@@ -171,19 +172,43 @@ public class GameWindow extends Canvas {
 			RenderableHolder.getinstance().updatePos(control);
 			int exp = RenderableHolder.getinstance().killmonster();
 			RenderableHolder.getinstance().Collision(character);
+			if (RenderableHolder.getinstance().isBossKilled()) {
+				isGameEnd = true;
+				isWin = true;
+			}
+			if (character.getLife() == 0) {
+				isGameEnd = true;
+				isWin = false;
+			}
+		}
+		if(isGameEnd) {
 			
 		}
+
 	}
 
 	public void updateSound() {
-		if (!soundbg.isPlaying()) {
-			soundbg.play();
+		if (!isBoss) {
+			if (!soundbg.isPlaying()) {
+				soundbg.play();
+			}
+		}
+		if (isBoss) {
+			soundbg.stop();
+			if (!soundboss.isPlaying()) {
+				soundboss.play();
+			}
 		}
 	}
 
-	public void updateState() {
-
-	}
+//	public void updateState() {
+//		if(isGameEnd) {
+//			GameOver.startAnimation(gc);
+//			gameWindowAnimation.stop();
+//			soundbg.stop();
+//			soundboss.stop();
+//		}
+//	}
 
 	public void addAll() {
 		addGameScreen();
@@ -211,7 +236,8 @@ public class GameWindow extends Canvas {
 			monster = new Horong(character);
 		if (i >= 7 && i < 9)
 			monster = new Hydra(character);
-		if( isBoss) monster = new Baphomet(character);
+		if (isBoss)
+			monster = new Baphomet(character);
 		RenderableHolder.getinstance().add(monster);
 	}
 

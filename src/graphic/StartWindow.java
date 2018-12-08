@@ -19,25 +19,20 @@ public class StartWindow {
 	private Stage primaryStage;
 	private Canvas bg;
 	private GraphicsContext gc;
-	private AnimationTimer gameAnimationTimer;
-	private AnimationTimer soundAnimationtimer;
-	private int frameBg = 0;
-	private int frameSpace = 0;
-	private boolean isPressedSpace = false;
-	private int numberselected = 0;
+	private AnimationTimer gameAnimationTimer,soundAnimationtimer;
+	private int frameBg, frameSpace,numberselected = 0;
 	private boolean isHowto;
-	private Image bgPic;
-	private Image cursur;
-	private Image howTo;
-	private AudioClip sound;
+	private Image bgPic,cursor,howTo;
+
+	private AudioClip sound,clicksound;
 
 	public StartWindow(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.bg = new Canvas(800, 480);
 		this.gc = bg.getGraphicsContext2D();
 		sound = new AudioClip(ClassLoader.getSystemResource("start.mp3").toString());
+		clicksound = new AudioClip(ClassLoader.getSystemResource("click.mp3").toString());
 		sound.play();
-		// TODO Auto-generated method stub ใส่เสียงด้วย
 
 	}
 
@@ -69,7 +64,7 @@ public class StartWindow {
 		if (!isHowto) {
 			bgPic = new Image(ClassLoader.getSystemResource("scene_start.png").toString());
 			gc.drawImage(bgPic, 0, 0);
-			cursur = new Image(ClassLoader.getSystemResource("cursor.png").toString());
+			cursor = new Image(ClassLoader.getSystemResource("cursor.png").toString());
 			drawSelected();
 		} else if (isHowto) {
 			howTo = new Image(ClassLoader.getSystemResource("map.png").toString());
@@ -83,23 +78,27 @@ public class StartWindow {
 			bg.setOnKeyPressed((KeyEvent) -> {
 				if (KeyEvent.getCode() == KeyCode.UP) {
 					if (numberselected != 0) {
+						clicksound.play();
 						numberselected--;
 						drawSelected();
 					}
 				}
 				if (KeyEvent.getCode() == KeyCode.DOWN)
 					if (numberselected != 1) {
+						clicksound.play();
 						numberselected++;
 						drawSelected();
 					}
 				if (KeyEvent.getCode() == KeyCode.SPACE) {
 					if (numberselected == 0) {
+						clicksound.play();
 						GameWindow game = new GameWindow(primaryStage);
 						game.drawGameWindow();
 						sound.stop();
 						gameAnimationTimer.stop();
 					}
 					if (numberselected == 1) {
+						clicksound.play();
 						isHowto = true;
 						addAction();
 					}
@@ -113,6 +112,7 @@ public class StartWindow {
 		if (isHowto) {
 			bg.setOnKeyPressed((KeyEvent) -> {
 				if (KeyEvent.getCode() == KeyCode.SPACE) {
+					clicksound.play();
 					GameWindow game = new GameWindow(primaryStage);
 					game.drawGameWindow();
 					sound.stop();
@@ -128,10 +128,10 @@ public class StartWindow {
 	public void drawSelected() {
 		setMenu();
 		if (numberselected == 0) {
-			gc.drawImage(cursur, 430, 400);
+			gc.drawImage(cursor, 430, 400);
 		}
 		if (numberselected == 1) {
-			gc.drawImage(cursur, 430, 440);
+			gc.drawImage(cursor, 430, 440);
 		}
 
 	}

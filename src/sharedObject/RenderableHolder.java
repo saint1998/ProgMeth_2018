@@ -101,4 +101,11 @@ public class RenderableHolder {
 		}
 		return exp;
 	}
+	
+	public boolean isBossKilled() {
+		for(IRenderable i : object) {
+			if(i instanceof Baphomet) return false;
+		}
+		return true;
+	}
 }

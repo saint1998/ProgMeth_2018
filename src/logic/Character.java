@@ -24,7 +24,7 @@ public class Character extends Entity {
 	private List<Image> down = new ArrayList<>();
 	private Image charpic;
 	private Image deadpic;
-	private AudioClip levelup;
+	private AudioClip levelup,firesound,damage;
 
 	public Character() {
 		super(400, 240);
@@ -37,6 +37,8 @@ public class Character extends Entity {
 		deadpic = new Image(ClassLoader.getSystemResource("dead.png").toString());
 		charpic = down.get(0);
 		levelup = new AudioClip(ClassLoader.getSystemResource("level.mp3").toString());
+		firesound = new AudioClip(ClassLoader.getSystemResource("fire.mp3").toString());
+		damage = new AudioClip(ClassLoader.getSystemResource("damage.mp3").toString());
 	}
 
 	public void gainHp() {
@@ -48,6 +50,7 @@ public class Character extends Entity {
 			if (checkIntersect(x, y, monster.getMonsterpic())) {
 				life--;
 				if(monster instanceof Baphomet) life = 0;
+				damage.play();
 				return true;
 			}
 		}
@@ -58,6 +61,7 @@ public class Character extends Entity {
 		if (life > 0) {
 			Fireball fireball = new Fireball(x, y, c);
 			RenderableHolder.getinstance().add(fireball);
+			firesound.play();
 		}
 	}
 

@@ -7,6 +7,7 @@ import java.util.Random;
 import graphic.GameScreen;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Rectangle;
 
 public abstract class Monster extends Entity {
@@ -16,6 +17,8 @@ public abstract class Monster extends Entity {
 	protected Character character;
 	protected boolean isVisible = true;
 	protected Image monsterpic;
+	private AudioClip damageSound;
+
 
 	public Monster(int hp, double speed) {
 		this.character = character;
@@ -23,6 +26,7 @@ public abstract class Monster extends Entity {
 		this.speed = speed;
 		this.x = (double) rand.nextInt(760);
 		this.y = (double) rand.nextInt(440);
+		damageSound = new AudioClip(ClassLoader.getSystemResource("monsdie.mp3").toString());
 	}
 
 	public double calx(double x, double y) {
@@ -49,6 +53,7 @@ public abstract class Monster extends Entity {
 		if (checkIntersect(x, y, fireball.getFireballpic())) {
 			hp--;
 			System.out.println(hp);
+			damageSound.play();
 			return true;
 		}
 		return false;

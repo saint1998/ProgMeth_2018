@@ -26,7 +26,6 @@ public class Fireball extends Entity {
 	}
 
 	public void draw(GraphicsContext gc) {
-//		gc.fillRect(x, y, fireballpic.getWidth(), fireballpic.getHeight());
 		gc.drawImage(fireballpic, x, y);
 	}
 
@@ -52,6 +51,5 @@ public class Fireball extends Entity {
 	public Image getFireballpic() {
 		return fireballpic;
 	}
-	
 
 }

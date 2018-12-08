@@ -6,5 +6,4 @@ public interface IRenderable {
 	public void draw(GraphicsContext gc);
 	public boolean isVisible();
 
-
 }

@@ -19,12 +19,12 @@ public class StartWindow {
 	private Stage primaryStage;
 	private Canvas bg;
 	private GraphicsContext gc;
-	private AnimationTimer gameAnimationTimer,soundAnimationtimer;
-	private int frameBg, frameSpace,numberselected = 0;
+	private AnimationTimer gameAnimationTimer;
+	private int numberselected = 0;
 	private boolean isHowto;
-	private Image bgPic,cursor,howTo;
+	private Image bgPic, cursor, howTo;
 
-	private AudioClip sound,clicksound;
+	private AudioClip sound, clicksound;
 
 	public StartWindow(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -51,7 +51,8 @@ public class StartWindow {
 			@Override
 			public void handle(long now) {
 				setBackground();
-				if(!sound.isPlaying()) sound.play();
+				if (!sound.isPlaying())
+					sound.play();
 			}
 		};
 		gameAnimationTimer.start();
@@ -67,7 +68,7 @@ public class StartWindow {
 			cursor = new Image(ClassLoader.getSystemResource("cursor.png").toString());
 			drawSelected();
 		} else if (isHowto) {
-			howTo = new Image(ClassLoader.getSystemResource("map.png").toString());
+			howTo = new Image(ClassLoader.getSystemResource("scene_howto.png").toString());
 			gc.drawImage(howTo, 0, 0);
 		}
 	}

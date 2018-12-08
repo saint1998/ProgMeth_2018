@@ -1,9 +1,5 @@
 package graphic;
 
-import java.util.Random;
-
-import com.sun.glass.events.KeyEvent;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -20,12 +16,10 @@ import logic.Horong;
 import logic.Hydra;
 import logic.Monster;
 import logic.Poring;
-import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
 public class GameWindow extends Canvas {
 	private static AnimationTimer gameWindowAnimation;
-	private Random rand = new Random();
 	private GameScreen gameScreen;
 	private String control = "";
 	private GraphicsContext gc;
@@ -33,15 +27,14 @@ public class GameWindow extends Canvas {
 	private Stage primaryStage;
 	private Character character;
 	private Monster monster;
-	private int monsteramount;
-	private int gameEndingtime = 50;
+	private int gameEndingtime, frame;
 	private char c = 's';
-	private int frame = 0, cooldownWW;
-	private boolean isPaused = false;
 	private AudioClip soundbg, soundboss;
-	private boolean isBoss, isBossAdded, isGameEnd, isWin;
+	private boolean isBoss, isBossAdded, isGameEnd, isWin, isPaused, isFire;
 
 	public GameWindow(Stage primaryStage) {
+		this.gameEndingtime = 50;
+		this.frame = 0;
 		setWidth(800);
 		setHeight(480);
 		this.primaryStage = primaryStage;
@@ -64,10 +57,8 @@ public class GameWindow extends Canvas {
 
 			@Override
 			public void handle(long now) {
-				// TODO Auto-generated method stub
 				updateDetail();
 				updateSound();
-//				updateState();
 			}
 		};
 		gameWindowAnimation.start();
@@ -97,8 +88,10 @@ public class GameWindow extends Canvas {
 				System.out.println(control);
 			}
 			if (KeyEvent.getCode() == KeyCode.SPACE) {
-				if (!isGameEnd)
+				if (!isGameEnd && !isFire) {
+					isFire = true;
 					character.attack(c);
+				}
 			}
 			if (KeyEvent.getCode() == KeyCode.ENTER) {
 				if (isGameEnd) {
@@ -114,12 +107,7 @@ public class GameWindow extends Canvas {
 			if (KeyEvent.getCode() == KeyCode.ESCAPE) {
 				Platform.exit();
 			}
-//			if(KeyEvent.getCode() == KeyCode.Z) {
-//				if(cooldownWW == 0) {
-//					character.skillWW();
-//					cooldownWW = 500;
-//				}
-//			}
+
 			if (KeyEvent.getCode() == KeyCode.P) {
 				if (!isPaused) {
 					gameWindowAnimation.stop();
@@ -158,7 +146,7 @@ public class GameWindow extends Canvas {
 			}
 
 			if (KeyEvent.getCode() == KeyCode.SPACE) {
-				RenderableHolder.getinstance().updatePos(control);
+				isFire = false;
 			}
 
 		});
@@ -199,7 +187,7 @@ public class GameWindow extends Canvas {
 			RenderableHolder.getinstance().remove();
 			RenderableHolder.getinstance().draw(gc);
 			RenderableHolder.getinstance().updatePos(control);
-			int exp = RenderableHolder.getinstance().killmonster();
+			RenderableHolder.getinstance().killmonster();
 			RenderableHolder.getinstance().Collision(character);
 			if (RenderableHolder.getinstance().isBossKilled()) {
 				if (gameEndingtime != 0)
@@ -240,18 +228,6 @@ public class GameWindow extends Canvas {
 			}
 		}
 	}
-
-//	public void updateState() {
-//		
-//		if(isGameEnd) {
-//			RenderableHolder.getinstance().draw(gc);
-//			RenderableHolder.getinstance().updatePos(control);
-//			gameWindowAnimation.stop();
-//			GameOver.startAnimation(gc);
-//			soundbg.stop();
-//			soundboss.stop();
-//		}
-//	}
 
 	public void addAll() {
 		addGameScreen();

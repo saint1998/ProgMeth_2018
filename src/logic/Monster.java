@@ -1,11 +1,7 @@
 package logic;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-import graphic.GameScreen;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Rectangle;
@@ -19,9 +15,7 @@ public abstract class Monster extends Entity {
 	protected Image monsterpic;
 	private AudioClip damageSound;
 
-
 	public Monster(int hp, double speed) {
-		this.character = character;
 		this.hp = hp;
 		this.speed = speed;
 		this.x = (double) rand.nextInt(760);
@@ -49,7 +43,7 @@ public abstract class Monster extends Entity {
 		return isVisible;
 	}
 
-	public boolean damaged(double x, double y,Fireball fireball) {
+	public boolean damaged(double x, double y, Fireball fireball) {
 		if (checkIntersect(x, y, fireball.getFireballpic())) {
 			hp--;
 			System.out.println(hp);
@@ -64,11 +58,11 @@ public abstract class Monster extends Entity {
 	public int getHp() {
 		return hp;
 	}
-	
+
 	public Image getMonsterpic() {
 		return monsterpic;
 	}
-	
+
 	private boolean checkIntersect(double x, double y, Image pic) {
 		Rectangle r = new Rectangle(x, y, pic.getWidth(), pic.getHeight());
 		if (r.intersects(this.x, this.y, monsterpic.getWidth(), monsterpic.getHeight())) {

@@ -10,28 +10,28 @@ public class Horong extends Monster {
 	private List<Image> monsterpics = new ArrayList<>();
 	private int timeOfPic;
 
-
 	public Horong(Character character) {
-		super(1,2);
-		for(int i = 1 ; i<5 ; ++i) {
+		super(1, 2);
+		for (int i = 1; i < 5; ++i) {
 			monsterpics.add(new Image(ClassLoader.getSystemResource("horong" + i + ".png").toString()));
 		}
-		this.character =character;
+		this.character = character;
 		monsterpic = monsterpics.get(0);
 	}
+
 	@Override
 	public void draw(GraphicsContext gc) {
-//		gc.fillRect(x, y, monsterpic.getWidth(), monsterpic.getHeight());
 		timeOfPic++;
-		if(timeOfPic >=40) timeOfPic = 0;
-		monsterpic = monsterpics.get(timeOfPic/10);
+		if (timeOfPic >= 40)
+			timeOfPic = 0;
+		monsterpic = monsterpics.get(timeOfPic / 10);
 		gc.drawImage(monsterpic, x, y);
 		System.out.println("draw horong");
 	}
-	
-	public  void updatePos() {
-		x += speed*calx(character.getX(),character.getY());
-		y += speed*caly(character.getX(),character.getY());
+
+	public void updatePos() {
+		x += speed * calx(character.getX(), character.getY());
+		y += speed * caly(character.getX(), character.getY());
 	}
 
 }

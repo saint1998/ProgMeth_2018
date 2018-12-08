@@ -16,7 +16,7 @@ public class GameScreen implements IRenderable{
 	
 	public void draw(GraphicsContext gc) {
 		gc.drawImage(bggame, 0, 0);
-		gc.setFont(new Font("Arial",14));
+		gc.setFont(new Font("Arial", 14));
 		gc.setFill(Color.WHITE);
 		gc.setStroke(Color.CORNFLOWERBLUE);
 		gc.fillText("Life : " + life, 10, 15);

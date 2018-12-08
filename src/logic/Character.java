@@ -1,6 +1,5 @@
 package logic;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,22 +11,23 @@ import sharedObject.RenderableHolder;
 
 public class Character extends Entity {
 	private String control;
-	private int life = 10;
-	private int exp = 0;
-	private int lv = 1;
-	private int maxExp = 50;
-	private int speed = 2;
-	private int timeOfpic = 0;
-	private List<Image> left = new ArrayList<>();
-	private List<Image> right = new ArrayList<>();
-	private List<Image> up = new ArrayList<>();
-	private List<Image> down = new ArrayList<>();
-	private Image charpic,deadpic;
+	private int life, exp, lv, maxExp, speed, timeOfpic;
+	private List<Image> left, right, up, down;
 
-	private AudioClip levelup,firesound,damage;
+	private Image charpic, deadpic;
+
+	private AudioClip levelup, firesound, damage;
 
 	public Character() {
 		super(400, 240);
+		this.life = 10;
+		this.lv = 1;
+		this.maxExp = 50;
+		this.speed = 2;
+		left = new ArrayList<>();
+		right = new ArrayList<>();
+		up = new ArrayList<>();
+		down = new ArrayList<>();
 		for (int i = 1; i < 6; ++i) {
 			left.add(new Image(ClassLoader.getSystemResource("move_left" + i + ".png").toString()));
 			right.add(new Image(ClassLoader.getSystemResource("move_right" + i + ".png").toString()));
@@ -49,7 +49,8 @@ public class Character extends Entity {
 		if (life > 0) {
 			if (checkIntersect(x, y, monster.getMonsterpic())) {
 				life--;
-				if(monster instanceof Baphomet) life = 0;
+				if (monster instanceof Baphomet)
+					life = 0;
 				damage.play();
 				return true;
 			}
@@ -66,7 +67,6 @@ public class Character extends Entity {
 	}
 
 	public void draw(GraphicsContext gc) {
-//		gc.fillRect(x, y, charpic.getWidth(), charpic.getHeight());
 		timeOfpic++;
 		if (timeOfpic >= 50)
 			timeOfpic = 0;
@@ -107,11 +107,6 @@ public class Character extends Entity {
 			maxExp += 10;
 			levelup.play();
 		}
-	}
-	
-	public void skillWW() {
-		Windwalk ww = new Windwalk(x, y);
-		RenderableHolder.getinstance().add(ww);
 	}
 
 	private boolean checkIntersect(double x, double y, Image pic) {

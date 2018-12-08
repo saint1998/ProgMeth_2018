@@ -1,6 +1,7 @@
 package graphic;
 
 import com.sun.glass.events.KeyEvent;
+import javafx.scene.media.AudioClip;
 import com.sun.xml.internal.bind.v2.TODO;
 import javafx.application.Platform;
 
@@ -19,17 +20,23 @@ public class StartWindow {
 	private Canvas bg;
 	private GraphicsContext gc;
 	private AnimationTimer gameAnimationTimer;
+	private AnimationTimer soundAnimationtimer;
 	private int frameBg = 0;
 	private int frameSpace = 0;
 	private boolean isPressedSpace = false;
 	private int numberselected = 0;
-	public Image bgPic;
+	private boolean isHowto;
+	private Image bgPic;
 	private Image cursur;
+	private Image howTo;
+	private AudioClip sound;
 
 	public StartWindow(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.bg = new Canvas(800, 480);
 		this.gc = bg.getGraphicsContext2D();
+		sound = new AudioClip(ClassLoader.getSystemResource("start.mp3").toString());
+		sound.play();
 		// TODO Auto-generated method stub ใส่เสียงด้วย
 
 	}
@@ -49,7 +56,6 @@ public class StartWindow {
 			@Override
 			public void handle(long now) {
 				setBackground();
-
 			}
 		};
 		gameAnimationTimer.start();
@@ -59,40 +65,61 @@ public class StartWindow {
 		GraphicsContext gc = bg.getGraphicsContext2D();
 		gc.setFill(Color.WHITE);
 		gc.fillRect(0, 0, bg.getWidth(), bg.getHeight());
-		bgPic = new Image(ClassLoader.getSystemResource("start_scene.png").toString());
-		gc.drawImage(bgPic, 0, 0);
-		cursur = new Image(ClassLoader.getSystemResource("cursor.png").toString());
-		drawSelected();
+		if (!isHowto) {
+			bgPic = new Image(ClassLoader.getSystemResource("scene_start.png").toString());
+			gc.drawImage(bgPic, 0, 0);
+			cursur = new Image(ClassLoader.getSystemResource("cursor.png").toString());
+			drawSelected();
+		} else if (isHowto) {
+			howTo = new Image(ClassLoader.getSystemResource("map.png").toString());
+			gc.drawImage(howTo, 0, 0);
+		}
 	}
 
 	public void addAction() {
-		bg.setOnKeyPressed((KeyEvent) -> {
-			if (KeyEvent.getCode() == KeyCode.UP) {
-				if (numberselected != 0) {
-					numberselected--;
-					drawSelected();
+		System.out.println("add action");
+		if (!isHowto) {
+			bg.setOnKeyPressed((KeyEvent) -> {
+				if (KeyEvent.getCode() == KeyCode.UP) {
+					if (numberselected != 0) {
+						numberselected--;
+						drawSelected();
+					}
 				}
-			}
-			if (KeyEvent.getCode() == KeyCode.DOWN)
-				if (numberselected != 1) {
-					numberselected++;
-					drawSelected();
+				if (KeyEvent.getCode() == KeyCode.DOWN)
+					if (numberselected != 1) {
+						numberselected++;
+						drawSelected();
+					}
+				if (KeyEvent.getCode() == KeyCode.SPACE) {
+					if (numberselected == 0) {
+						GameWindow game = new GameWindow(primaryStage);
+						game.drawGameWindow();
+						sound.stop();
+					}
+					if (numberselected == 1) {
+						isHowto = true;
+						addAction();
+					}
 				}
-			if (KeyEvent.getCode() == KeyCode.SPACE) {
-				if (numberselected == 0) {
+				if (KeyEvent.getCode() == KeyCode.ESCAPE) {
+					Platform.exit();
+				}
+
+			});
+		}
+		if (isHowto) {
+			bg.setOnKeyPressed((KeyEvent) -> {
+				if (KeyEvent.getCode() == KeyCode.SPACE) {
 					GameWindow game = new GameWindow(primaryStage);
 					game.drawGameWindow();
+					sound.stop();
 				}
-				if (numberselected == 1) {
-					// TODO Auto-generated method stub
-
+				if (KeyEvent.getCode() == KeyCode.ESCAPE) {
+					Platform.exit();
 				}
-			}
-			if (KeyEvent.getCode() == KeyCode.ESCAPE) {
-				Platform.exit();
-			}
-
-		});
+			});
+		}
 	}
 
 	public void drawSelected() {

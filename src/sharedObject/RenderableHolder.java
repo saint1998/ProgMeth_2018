@@ -68,7 +68,7 @@ public class RenderableHolder {
 
 		for (IRenderable i : object) {
 			if (i instanceof Monster) {
-				if (character.damaged(((Monster) i).getX(), ((Monster) i).getY())) {
+				if (character.damaged(((Monster) i).getX(), ((Monster) i).getY(),((Monster)i))) {
 					System.out.println("monster attack");
 					((Monster) i).setVisible(false);
 				}

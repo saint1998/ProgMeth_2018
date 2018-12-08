@@ -2,22 +2,21 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Drops extends Monster{
+public class Poring extends Monster{
 	private List<Image> monsterpics = new ArrayList<>();
 	private List<Image> monsterpicsrv = new ArrayList<>();
 	private int timeOfPic;
 
 
-	public Drops(Character character) {
+	public Poring(Character character) {
 		super(1,1.2);
 		for(int i = 1 ; i<5 ; ++i) {
-			monsterpics.add(new Image(ClassLoader.getSystemResource("drop" + i + ".png").toString()));
-			monsterpicsrv.add(new Image(ClassLoader.getSystemResource("pord" + i + ".png").toString()));
+			monsterpics.add(new Image(ClassLoader.getSystemResource("poring" + i + ".png").toString()));
+			monsterpicsrv.add(new Image(ClassLoader.getSystemResource("gnirop" + i + ".png").toString()));
 		}
 		this.character =character;
 		monsterpic = monsterpics.get(0);
@@ -37,11 +36,5 @@ public class Drops extends Monster{
 		else  	monsterpic = monsterpicsrv.get(timeOfPic/10);
 
 	}
-	
-
-
-
-
-	
 
 }

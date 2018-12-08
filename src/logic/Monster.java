@@ -59,6 +59,10 @@ public abstract class Monster extends Entity {
 	public int getHp() {
 		return hp;
 	}
+	
+	public Image getMonsterpic() {
+		return monsterpic;
+	}
 
 	public void setVisible(boolean isVisible) {
 		System.out.println("set invis monster");

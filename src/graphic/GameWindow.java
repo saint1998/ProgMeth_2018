@@ -10,11 +10,15 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
+import logic.Baphomet;
 import logic.Character;
 import logic.Drops;
+import logic.Horong;
 import logic.Hydra;
 import logic.Monster;
+import logic.Poring;
 import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
 
@@ -32,6 +36,7 @@ public class GameWindow extends Canvas {
 	private char c = 's';
 	private int frame = 0;
 	private boolean isPaused = false;
+	private AudioClip soundbg;
 
 	public GameWindow(Stage primaryStage) {
 		setWidth(800);
@@ -43,6 +48,8 @@ public class GameWindow extends Canvas {
 		scene = new Scene(root);
 		this.primaryStage.setScene(scene);
 		addAll();
+		soundbg = new AudioClip(ClassLoader.getSystemResource("ingame.mp3").toString());
+		soundbg.play();
 		requestFocus();
 	}
 
@@ -163,9 +170,12 @@ public class GameWindow extends Canvas {
 	}
 
 	public void addMonster() {
-		int i = rand.nextInt(2);
+		int i = rand.nextInt(5);
 		if(i == 0) monster = new Drops(character);
 		if(i == 1) monster = new Hydra(character);
+		if(i == 2) monster = new Horong(character);
+		if(i == 3) monster = new Poring(character);
+		if(i == 4) monster = new Baphomet(character);
 		RenderableHolder.getinstance().add(monster);
 	}
 

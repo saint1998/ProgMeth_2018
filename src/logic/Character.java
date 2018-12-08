@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
+import javafx.scene.shape.Rectangle;
 import sharedObject.RenderableHolder;
 
 public class Character extends Entity {
@@ -20,8 +22,9 @@ public class Character extends Entity {
 	private List<Image> right = new ArrayList<>();
 	private List<Image> up = new ArrayList<>();
 	private List<Image> down = new ArrayList<>();
-	public Image charpic;
-	public Image deadpic;
+	private Image charpic;
+	private Image deadpic;
+	private AudioClip levelup;
 
 	public Character() {
 		super(400, 240);
@@ -33,21 +36,21 @@ public class Character extends Entity {
 		}
 		deadpic = new Image(ClassLoader.getSystemResource("dead.png").toString());
 		charpic = down.get(0);
+		levelup = new AudioClip(ClassLoader.getSystemResource("level.mp3").toString());
 	}
 
 	public void gainHp() {
 		life++;
 	}
 
-	public boolean damaged(double x, double y) {
-		if(Math.abs(this.x-x)<= charpic.getWidth() && Math.abs(this.y-y)<=charpic.getHeight()) {
+	public boolean damaged(double x, double y, Monster monster) {
+		if (checkIntersect(x, y, monster.getMonsterpic())) {
 			life--;
-			System.out.println("ch damaged");
 			return true;
 		}
 		return false;
 	}
-	
+
 	public void attack(char c) {
 		Fireball fireball = new Fireball(x, y, c);
 		RenderableHolder.getinstance().add(fireball);
@@ -61,11 +64,11 @@ public class Character extends Entity {
 	}
 
 	public void updatePos() {
-		if (control.contains("a") && x> 0) {
+		if (control.contains("a") && x > 0) {
 			x -= speed;
 			charpic = left.get(timeOfpic / 10);
 		}
-		if (control.contains("d") && x < 800-charpic.getWidth()) {
+		if (control.contains("d") && x < 800 - charpic.getWidth()) {
 			x += speed;
 			charpic = right.get(timeOfpic / 10);
 		}
@@ -73,7 +76,7 @@ public class Character extends Entity {
 			y -= speed;
 			charpic = up.get(timeOfpic / 10);
 		}
-		if (control.contains("s") && y < 480 - charpic.getHeight() ) {
+		if (control.contains("s") && y < 480 - charpic.getHeight()) {
 			y += speed;
 			charpic = down.get(timeOfpic / 10);
 		}
@@ -82,13 +85,22 @@ public class Character extends Entity {
 			speed = 0;
 		}
 	}
-	
+
 	public void updateLv() {
-		if(exp >= maxExp) {
+		if (exp >= maxExp) {
 			lv++;
 			exp = 0;
 			maxExp *= 1.5;
+			levelup.play();
 		}
+	}
+
+	private boolean checkIntersect(double x, double y, Image monsterpic) {
+		Rectangle r = new Rectangle(x, y, monsterpic.getWidth(), monsterpic.getHeight());
+		if (r.intersects(this.x, this.y, charpic.getWidth(), charpic.getHeight())) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -127,9 +139,9 @@ public class Character extends Entity {
 	public void setMaxExp(int maxExp) {
 		this.maxExp = maxExp;
 	}
-	
+
 	public void setControl(String control) {
-		this.control =control;
+		this.control = control;
 	}
 
 }

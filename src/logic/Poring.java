@@ -27,7 +27,6 @@ public class Poring extends Monster {
 		if (timeOfPic >= 40)
 			timeOfPic = 0;
 		gc.drawImage(monsterpic, x, y);
-		System.out.println("draw drop");
 	}
 
 	public void updatePos() {

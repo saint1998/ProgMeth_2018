@@ -72,7 +72,6 @@ public class StartWindow {
 	}
 
 	public void addAction() {
-		System.out.println("add action");
 		if (!isHowto) {
 			bg.setOnKeyPressed((KeyEvent) -> {
 				if (KeyEvent.getCode() == KeyCode.UP) {

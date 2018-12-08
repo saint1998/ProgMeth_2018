@@ -27,7 +27,6 @@ public class Hydra extends Monster {
 			timeOfPic = 0;
 		monsterpic = monsterpics.get(timeOfPic / 10);
 		gc.drawImage(monsterpic, x, y);
-		System.out.println("draw hydra");
 	}
 
 	public void updatePos() {

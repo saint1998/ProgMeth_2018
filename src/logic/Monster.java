@@ -46,7 +46,6 @@ public abstract class Monster extends Entity {
 	public boolean damaged(double x, double y, Fireball fireball) {
 		if (checkIntersect(x, y, fireball.getFireballpic())) {
 			hp--;
-			System.out.println(hp);
 			damageSound.play();
 			return true;
 		}
@@ -72,7 +71,6 @@ public abstract class Monster extends Entity {
 	}
 
 	public void setVisible(boolean isVisible) {
-		System.out.println("set invis monster");
 		this.isVisible = isVisible;
 	}
 

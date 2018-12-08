@@ -35,7 +35,6 @@ public class RenderableHolder {
 		int n = object.size();
 		for (int i = n - 1; i >= 0; i--) {
 			if (object.get(i).isVisible() == false) {
-				System.out.println("remove");
 				object.remove(i);
 			}
 		}
@@ -61,7 +60,6 @@ public class RenderableHolder {
 		for (IRenderable i : object) {
 			if (i instanceof Monster) {
 				if (character.damaged(((Monster) i).getX(), ((Monster) i).getY(), ((Monster) i))) {
-					System.out.println("monster attack");
 					if (!(i instanceof Baphomet))
 						((Monster) i).setVisible(false);
 				}
@@ -79,7 +77,6 @@ public class RenderableHolder {
 						if (((Monster) i).damaged(((Fireball) j).getX(), ((Fireball) j).getY(), (Fireball) j)) {
 							((Fireball) j).setVisible(false);
 							if (((Monster) i).getHp() == 0) {
-								System.out.println("monster is damaged");
 								((Monster) i).setVisible(false);
 								((Fireball) j).setVisible(false);
 								exp += 10;

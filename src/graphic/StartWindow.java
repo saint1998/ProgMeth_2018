@@ -1,8 +1,6 @@
 package graphic;
 
-import com.sun.glass.events.KeyEvent;
 import javafx.scene.media.AudioClip;
-import com.sun.xml.internal.bind.v2.TODO;
 import javafx.application.Platform;
 
 import javafx.animation.AnimationTimer;

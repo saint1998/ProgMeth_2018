@@ -6,10 +6,10 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 
 public class GameOver {
-	public static Image gameover;
-	public static AudioClip gameoversound = new AudioClip(ClassLoader.getSystemResource("die.mp3").toString());
-
+	public static Image gameOver;
+	public static AudioClip gameOversound ;
 	public GameOver() {
+		gameOversound = new AudioClip(ClassLoader.getSystemResource("die.mp3").toString());
 
 	}
 
@@ -23,16 +23,16 @@ public class GameOver {
 	public static void setBackground(GraphicsContext gc) {
 		gc.setFill(Color.BLACK);
 		gc.fillRect(0, 0, 800, 450);
-		gc.drawImage(gameover, 0, 0);
+		gc.drawImage(gameOver, 0, 0);
 	}
 
 	public static void setImage() {
-		gameover = new Image("scene_died.png");
+		gameOver = new Image("scene_died.png");
 
 	}
 
 	public static void playSong() {
-		gameoversound.play();
+		gameOversound.play();
 	}
 
 	public static void startAnimation(GraphicsContext gc) {
@@ -40,7 +40,7 @@ public class GameOver {
 	}
 
 	public static void stopsound() {
-		gameoversound.stop();
+		gameOversound.stop();
 	}
 
 }

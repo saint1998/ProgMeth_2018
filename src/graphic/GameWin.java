@@ -7,10 +7,10 @@ import javafx.scene.paint.Color;
 
 public class GameWin {
 	public static Image gameover;
-	public static AudioClip gameoversound = new AudioClip(ClassLoader.getSystemResource("win.mp3").toString());
+	public static AudioClip gameoversound ;
 
 	public GameWin() {
-
+		gameoversound = new AudioClip(ClassLoader.getSystemResource("win.mp3").toString());
 	}
 
 	public static void draw(GraphicsContext gc) {

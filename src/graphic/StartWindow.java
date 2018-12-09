@@ -18,18 +18,18 @@ public class StartWindow {
 	private Canvas bg;
 	private GraphicsContext gc;
 	private AnimationTimer gameAnimationTimer;
-	private int numberselected = 0;
+	private int numberSelected = 0;
 	private boolean isHowto;
 	private Image bgPic, cursor, howTo;
 
-	private AudioClip sound, clicksound;
+	private AudioClip sound, clickSound;
 
 	public StartWindow(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.bg = new Canvas(800, 480);
 		this.gc = bg.getGraphicsContext2D();
 		sound = new AudioClip(ClassLoader.getSystemResource("start.mp3").toString());
-		clicksound = new AudioClip(ClassLoader.getSystemResource("click.mp3").toString());
+		clickSound = new AudioClip(ClassLoader.getSystemResource("click.mp3").toString());
 		sound.play();
 
 	}
@@ -75,28 +75,28 @@ public class StartWindow {
 		if (!isHowto) {
 			bg.setOnKeyPressed((KeyEvent) -> {
 				if (KeyEvent.getCode() == KeyCode.UP) {
-					if (numberselected != 0) {
-						clicksound.play();
-						numberselected--;
+					if (numberSelected != 0) {
+						clickSound.play();
+						numberSelected--;
 						drawSelected();
 					}
 				}
 				if (KeyEvent.getCode() == KeyCode.DOWN)
-					if (numberselected != 1) {
-						clicksound.play();
-						numberselected++;
+					if (numberSelected != 1) {
+						clickSound.play();
+						numberSelected++;
 						drawSelected();
 					}
 				if (KeyEvent.getCode() == KeyCode.SPACE) {
-					if (numberselected == 0) {
-						clicksound.play();
+					if (numberSelected == 0) {
+						clickSound.play();
 						GameWindow game = new GameWindow(primaryStage);
 						game.drawGameWindow();
 						sound.stop();
 						gameAnimationTimer.stop();
 					}
-					if (numberselected == 1) {
-						clicksound.play();
+					if (numberSelected == 1) {
+						clickSound.play();
 						isHowto = true;
 						addAction();
 					}
@@ -110,7 +110,7 @@ public class StartWindow {
 		if (isHowto) {
 			bg.setOnKeyPressed((KeyEvent) -> {
 				if (KeyEvent.getCode() == KeyCode.SPACE) {
-					clicksound.play();
+					clickSound.play();
 					GameWindow game = new GameWindow(primaryStage);
 					game.drawGameWindow();
 					sound.stop();
@@ -125,10 +125,10 @@ public class StartWindow {
 
 	public void drawSelected() {
 		setMenu();
-		if (numberselected == 0) {
+		if (numberSelected == 0) {
 			gc.drawImage(cursor, 430, 400);
 		}
-		if (numberselected == 1) {
+		if (numberSelected == 1) {
 			gc.drawImage(cursor, 430, 440);
 		}
 

@@ -8,7 +8,7 @@ import sharedObject.IRenderable;
 
 public class GameScreen implements IRenderable{
 	private int lv,exp,maxExp,life;
-	public Image BGgame,skillatk;
+	public Image BGgame;
 	
 	public GameScreen() {
 		BGgame = new Image(ClassLoader.getSystemResource("map.png").toString());

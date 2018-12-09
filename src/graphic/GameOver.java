@@ -7,9 +7,8 @@ import javafx.scene.paint.Color;
 
 public class GameOver {
 	public static Image gameOver;
-	public static AudioClip gameOversound ;
+	public static AudioClip gameOversound = new AudioClip(ClassLoader.getSystemResource("die.mp3").toString());;
 	public GameOver() {
-		gameOversound = new AudioClip(ClassLoader.getSystemResource("die.mp3").toString());
 
 	}
 

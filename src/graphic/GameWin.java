@@ -6,11 +6,11 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 
 public class GameWin {
-	public static Image gameover;
-	public static AudioClip gameoversound = new AudioClip(ClassLoader.getSystemResource("win.mp3").toString());
+	public static Image gameWin;
+	public static AudioClip gameWinSound = new AudioClip(ClassLoader.getSystemResource("win.mp3").toString());
 
 	public GameWin() {
-
+		
 	}
 
 	public static void draw(GraphicsContext gc) {
@@ -23,16 +23,16 @@ public class GameWin {
 	public static void setBackground(GraphicsContext gc) {
 		gc.setFill(Color.BLACK);
 		gc.fillRect(0, 0, 800, 450);
-		gc.drawImage(gameover, 0, 0);
+		gc.drawImage(gameWin, 0, 0);
 	}
 
 	public static void setImage() {
-		gameover = new Image("scene_win.png");
+		gameWin = new Image("scene_win.png");
 
 	}
 
 	public static void playSong() {
-		gameoversound.play();
+		gameWinSound.play();
 	}
 
 	public static void startAnimation(GraphicsContext gc) {
@@ -40,7 +40,7 @@ public class GameWin {
 	}
 
 	public static void stopsound() {
-		gameoversound.stop();
+		gameWinSound.stop();
 	}
 
 }

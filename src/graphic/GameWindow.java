@@ -29,7 +29,7 @@ public class GameWindow extends Canvas {
 	private Monster monster;
 	private int gameEndingtime, frame;
 	private char c = 's';
-	private AudioClip soundbg, soundboss;
+	private AudioClip soundBG, soundBoss;
 	private boolean isBoss, isBossAdded, isGameEnd, isWin, isPaused, isFire;
 
 	public GameWindow(Stage primaryStage) {
@@ -44,9 +44,9 @@ public class GameWindow extends Canvas {
 		scene = new Scene(root);
 		this.primaryStage.setScene(scene);
 		addAll();
-		soundbg = new AudioClip(ClassLoader.getSystemResource("ingame.mp3").toString());
-		soundboss = new AudioClip(ClassLoader.getSystemResource("boss.mp3").toString());
-		soundbg.play();
+		soundBG = new AudioClip(ClassLoader.getSystemResource("ingame.mp3").toString());
+		soundBoss = new AudioClip(ClassLoader.getSystemResource("boss.mp3").toString());
+		soundBG.play();
 		requestFocus();
 	}
 
@@ -209,22 +209,22 @@ public class GameWindow extends Canvas {
 				GameWin.startAnimation(gc);
 			else
 				GameOver.startAnimation(gc);
-			soundbg.stop();
-			soundboss.stop();
+			soundBG.stop();
+			soundBoss.stop();
 		}
 
 	}
 
 	public void updateSound() {
 		if (!isBoss && !isGameEnd) {
-			if (!soundbg.isPlaying()) {
-				soundbg.play();
+			if (!soundBG.isPlaying()) {
+				soundBG.play();
 			}
 		}
 		if (isBoss && !isGameEnd) {
-			soundbg.stop();
-			if (!soundboss.isPlaying()) {
-				soundboss.play();
+			soundBG.stop();
+			if (!soundBoss.isPlaying()) {
+				soundBoss.play();
 			}
 		}
 	}
@@ -260,7 +260,7 @@ public class GameWindow extends Canvas {
 		RenderableHolder.getinstance().add(monster);
 	}
 
-	public static AnimationTimer geAnimationTimer() {
+	public static AnimationTimer getAnimationTimer() {
 		return gameWindowAnimation;
 	}
 

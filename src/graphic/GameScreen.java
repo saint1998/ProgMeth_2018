@@ -8,14 +8,14 @@ import sharedObject.IRenderable;
 
 public class GameScreen implements IRenderable{
 	private int lv,exp,maxExp,life;
-	public Image bggame,skillatk;
+	public Image BGgame;
 	
 	public GameScreen() {
-		bggame = new Image(ClassLoader.getSystemResource("map.png").toString());
+		BGgame = new Image(ClassLoader.getSystemResource("map.png").toString());
 	}
 	
 	public void draw(GraphicsContext gc) {
-		gc.drawImage(bggame, 0, 0);
+		gc.drawImage(BGgame, 0, 0);
 		gc.setFont(new Font("Arial", 14));
 		gc.setFill(Color.WHITE);
 		gc.setStroke(Color.CORNFLOWERBLUE);

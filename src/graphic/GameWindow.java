@@ -187,7 +187,7 @@ public class GameWindow extends Canvas {
 			RenderableHolder.getinstance().remove();
 			RenderableHolder.getinstance().draw(gc);
 			RenderableHolder.getinstance().updatePos(control);
-			RenderableHolder.getinstance().killmonster();
+			int exp = RenderableHolder.getinstance().killmonster();
 			RenderableHolder.getinstance().Collision(character);
 			if (RenderableHolder.getinstance().isBossKilled()) {
 				if (gameEndingtime != 0)

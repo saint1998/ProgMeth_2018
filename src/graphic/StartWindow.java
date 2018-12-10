@@ -7,6 +7,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
@@ -21,7 +22,6 @@ public class StartWindow {
 	private int numberselected = 0;
 	private boolean isHowto;
 	private Image bgPic, cursor, howTo;
-
 	private AudioClip sound, clicksound;
 
 	public StartWindow(Stage primaryStage) {
@@ -39,7 +39,7 @@ public class StartWindow {
 		root.setPrefSize(800, 480);
 		setBackground();
 		addAction();
-		root.getChildren().add(bg);
+		root.getChildren().addAll(bg);
 		Scene scene = new Scene(root);
 		bg.requestFocus();
 		primaryStage.setScene(scene);
@@ -58,8 +58,6 @@ public class StartWindow {
 
 	public void setBackground() {
 		GraphicsContext gc = bg.getGraphicsContext2D();
-		gc.setFill(Color.WHITE);
-		gc.fillRect(0, 0, bg.getWidth(), bg.getHeight());
 		if (!isHowto) {
 			bgPic = new Image(ClassLoader.getSystemResource("scene_start.png").toString());
 			gc.drawImage(bgPic, 0, 0);

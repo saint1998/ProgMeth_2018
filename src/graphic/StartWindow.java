@@ -22,15 +22,7 @@ public class StartWindow {
 	private int numberSelected = 0;
 	private boolean isHowto;
 	private Image bgPic, cursor, howTo;
-<<<<<<< HEAD
-	private AudioClip sound, clicksound;
-||||||| merged common ancestors
-
-	private AudioClip sound, clicksound;
-=======
-
 	private AudioClip sound, clickSound;
->>>>>>> 7ef21a0cb034cda0744fc70a5d40bbc2b4ccb56f
 
 	public StartWindow(Stage primaryStage) {
 		this.primaryStage = primaryStage;
